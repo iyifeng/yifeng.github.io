@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2013/12 | Hexo</title>
+  <title>Tag: 配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://54805280.com/archives/2013/12/">
+<meta property="og:url" content="http://54805280.com/tags/配置/">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -329,92 +329,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bean/">bean</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事物/">事物</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/配置/">配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-SSH-BUG-出错及解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/12/05/java-SSH-BUG-出错及解决办法/" class="article-date">
-  <time datetime="2013-12-05T06:46:08.000Z" itemprop="datePublished">12月 5 2013</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/12/05/java-SSH-BUG-出错及解决办法/">java SSH BUG 出错及解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="java_SSH项目_BUG出错及解决办法">java SSH项目 BUG出错及解决办法</h2>
-<h3 id="1-问题：">1.问题：</h3>
-<pre><code><span class="constant">Exception</span> <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.<span class="constant">NoClassDefFoundError</span><span class="symbol">:org/dom4j/DocumentException</span>
-at <span class="constant">HibernateTest</span>.main(<span class="constant">HibernateTest</span>.<span class="symbol">java:</span><span class="number">14</span>)
-</code></pre><h3 id="解决方法：">解决方法：</h3>
-<pre><code>添加dom4j<span class="built_in">.</span>jar(解析hibernate<span class="built_in">.</span>cfg<span class="built_in">.</span><span class="built_in">xml</span>文件)
-</code></pre><h3 id="2．问题：">2．问题：</h3>
-<pre><code>Exception in thread <span class="string">"main"</span> <span class="filename">java.lang.NoClassDefFoundError</span>: org/apache/commons/logging/LogFactory
-at <span class="filename">org.hibernate.cfg.Configuration.&lt;clinit&gt;(Configuration.java</span>:<span class="number">116</span>)
-at <span class="filename">HibernateTest.main(HibernateTest.java</span>:<span class="number">14</span>)
-</code></pre><h3 id="解决方法">解决方法</h3>
-<pre><code>添加commons-logging.jar(记录解析过程)
-</code></pre><h3 id="3．问题：">3．问题：</h3>
-<pre><code>Exception in thread <span class="string">"main"</span> java.lang.NoClassDefFoundError: org<span class="regexp">/apache/</span>commons<span class="regexp">/collections/</span>SequencedHashMap
-</code></pre><h3 id="解决方法：-1">解决方法：</h3>
-<pre><code>添加commons-collections.jar(在解析映射文件时，需要把所有持久化对象的定义放在一个HashMap中)
-</code></pre><h3 id="4．问题：">4．问题：</h3>
-<pre><code>Exception <span class="keyword">in</span> <span class="keyword">thread</span> <span class="string">"main"</span> java<span class="built_in">.</span>lang<span class="built_in">.</span>NoClassDefFoundError: net/sf/ehcache/CacheException
-</code></pre><h3 id="解决方法：-2">解决方法：</h3>
-<pre><code>添加ehcache.jar(高速缓存，提高存取速度)
-</code></pre><h3 id="5．问题：">5．问题：</h3>
-<pre><code>net.sf.ehcache.config.Configurator configure
-警告: No configuration found. Configuring ehcache <span class="keyword">from</span> ehcache-failsafe.xml found in the <span class="keyword">classpath</span>: jar:<span class="keyword">file</span>:<span class="regexp">/F:/</span>MyJava<span class="regexp">/Hibernate/</span>lib<span class="regexp">/ehcache-1.1.jar!/</span>ehcache-failsafe.xml
-Exception in thread <span class="string">"main"</span> java.lang.NoClassDefFoundError
-</code></pre><h3 id="解决方法：-3">解决方法：</h3>
-<pre><code>把ehcache<span class="subst">-</span><span class="number">1.1</span><span class="built_in">.</span>jar解压，把其中的ehcache<span class="attribute">-failsafe</span><span class="built_in">.</span><span class="built_in">xml</span>改成ehcache<span class="built_in">.</span><span class="built_in">xml</span>。
-</code></pre><h3 id="6-问题：">6.问题：</h3>
-<pre><code>Caused by: java.lang.ClassNotFoundException: net.sf.cglib.transform.<span class="keyword">impl</span>.InterceptFieldEnabled
-</code></pre><h3 id="解决方法：-4">解决方法：</h3>
-<pre><code>添加cglib-full-2.0.02.jar
-</code></pre><h3 id="7-问题：">7.问题：</h3>
-<pre><code>Caused by: <span class="filename">java.lang.NoSuchMethodError</span>: <span class="filename">net.sf.cglib.proxy.Enhancer.setInterceptDuringConstruction(Z)V</span>
-</code></pre><h3 id="解决方法：-5">解决方法：</h3>
-<pre><code>添加cglib-nodep-2.1_3.jar
-</code></pre><h3 id="8-问题:">8.问题:</h3>
-<pre><code>Exception <span class="keyword">in</span> thread <span class="string">"main"</span> java.lang.NoClassDefFoundError: javax/<span class="keyword">transaction</span>/Synchronization
-</code></pre><h3 id="结局方法:">结局方法:</h3>
-<pre><code>添加jta.jar(事务处理)
-</code></pre><h3 id="9-问题:">9.问题:</h3>
-<pre><code>Exception <span class="keyword">in</span> <span class="keyword">thread</span> <span class="string">"main"</span> java<span class="built_in">.</span>lang<span class="built_in">.</span>NoClassDefFoundError: antlr/ANTLRException
-</code></pre><h3 id="解决方法:">解决方法:</h3>
-<pre><code>添加antlr-2.7.5h3.jar
-</code></pre><h3 id="10问题:">10问题:</h3>
-<pre><code>Caused <span class="keyword">by</span>: java.sql.SQLException: The statement (<span class="number">1</span>) has no <span class="built_in">open</span> cursor.
-<span class="keyword">at</span> com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:<span class="number">2901</span>)
-<span class="keyword">at</span> com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:<span class="number">773</span>)
-</code></pre><h3 id="解决方法:-1">解决方法:</h3>
-<pre><code> <span class="comment">&lt;!-- &lt;property name="jdbc.fetch_size"&gt;50 &lt;/property&gt;  --&gt;</span> 把上面这个属性按上面这样注释掉就可以了.
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://54805280.com/2013/12/05/java-SSH-BUG-出错及解决办法/" data-id="rioq0pt06rflj1sf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exception/">Exception</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
 
     </footer>
   </div>
