@@ -6,148 +6,19 @@
       <title></title>
    
    <link></link>
-   <description>A beautiful narrative written with the world's most elegant publishing platform. The story begins here.</description>
+   <description>没啥说的，就是干</description>
    <language>zh-Hans</language>
    <managingEditor> </managingEditor>
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    
 	<item>
-	  <title>Down The Rabbit Hole</title>
-	  <link>/down-the-rabbit-hole</link>
-	  <author></author>
-	  <pubDate>1865-11-26T18:18:00+08:00</pubDate>
-	  <guid>/down-the-rabbit-hole</guid>
-	  <description><![CDATA[
-	     <h2 id="1技巧一">1.<strong>技巧一</strong></h2>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x &amp; (x - 1) 用于消去x最后一位的1
-x = 1100
-x - 1 = 1011
-x &amp; (x - 1) = 1000
-</code></pre></div></div>
-
-<p><strong>1.1.应用一</strong> <strong>用 O(1) 时间检测整数 n 是否是 2 的幂次。</strong></p>
-
-<blockquote>
-  <p><a href="https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/o1-check-power-of-2/">http://www.lintcode.com/zh-cn/problem/o1-check-power-of-2/</a></p>
-</blockquote>
-
-<p><strong>思路解析：</strong></p>
-
-<p>N如果是2的幂次，则N满足两个条件。
-  1.N &gt;0 
-  2.N的二进制表示中只有一个1
-因为N的二进制表示中只有一个1，所以使用N &amp; (N - 1)将N唯一的一个1消去，应该返回0。</p>
-
-<p><strong>1.2.应用二</strong> <strong>计算在一个 32 位的整数的二进制表式中有多少个 1。</strong></p>
-
-<blockquote>
-  <p><a href="https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/count-1-in-binary/">http://www.lintcode.com/zh-cn/problem/count-1-in-binary/</a></p>
-</blockquote>
-
-<p><strong>思路解析：</strong></p>
-
-<p>由x &amp; (x - 1)消去x最后一位的1可知。不断使用 x &amp; (x - 1) 消去x最后一位的1，计算总共消去了多少次即可。</p>
-
-<p><strong>1.3.应用三</strong> <strong>如果要将整数A转换为B，需要改变多少个bit位？</strong></p>
-
-<blockquote>
-  <p><a href="https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/flip-bits/">http://www.lintcode.com/zh-cn/problem/flip-bits/</a></p>
-</blockquote>
-
-<p><strong>解题思路：</strong></p>
-
-<p>这个应用是上面一个应用的拓展。
-思考将整数A转换为B，如果A和B在第i（0&lt;=i&lt;32）个位上相等，则不需要改变这个BIT位，如果在第i位上不相等，则需要改变这个BIT位。所以问题转化为了A和B有多少个BIT位不相同。联想到位运算有一个异或操作，相同为0，相异为1，所以问题转变成了计算A异或B之后这个数中1的个数。</p>
-
-<h2 id="2技巧二">2<strong>技巧二</strong></h2>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>使用二进制进行子集枚举
-</code></pre></div></div>
-
-<p><strong>应用</strong> <strong>给定一个含不同整数的集合，返回其所有的子集。</strong></p>
-
-<blockquote>
-  <p><a href="https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/subsets/">http://www.lintcode.com/zh-cn/problem/subsets/</a></p>
-</blockquote>
-
-<p><strong>解题思路：</strong></p>
-
-<p>思路就是使用一个正整数二进制表示的第i位是1还是0，代表集合的第i个数取或者不取。
-所以从0到2^n-1总共2^n个整数，正好对应集合的2^n个子集。</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>S = {1,2,3}
-N bit Combination
-0 000 {}
-1 001 {1}
-2 010 {2}
-3 011 {1,2}
-4 100 {3}
-5 101 {1,3}
-6 110 {2,3}
-7 111 {1,2,3}
-</code></pre></div></div>
-
-<h2 id="3技巧三">3<strong>技巧三</strong></h2>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a ^ b ^ b = a
-</code></pre></div></div>
-
-<p><strong>3.1.应用一</strong> <strong>数组中，只有一个数出现一次，剩下都出现两次，找出出现一次的数</strong></p>
-
-<blockquote>
-  <p><a href="https://link.zhihu.com/?target=http%3A//www.lintcode.com/en/problem/single-number/">http://www.lintcode.com/en/problem/single-number/</a></p>
-</blockquote>
-
-<p><strong>思路解析：</strong></p>
-
-<p>因为只有一个数恰好出现一个，剩下的都出现过两次，所以只要将所有的数异或起来，就可以得到唯一的那个数。</p>
-
-<p><strong>3.2.应用二</strong> <strong>数组中，只有一个数出现一次，剩下都出现三次，找出出现一次的。</strong></p>
-
-<blockquote>
-  <p><a href="https://link.zhihu.com/?target=http%3A//www.lintcode.com/en/problem/single-number-iii/">http://www.lintcode.com/en/problem/single-number-iii/</a></p>
-</blockquote>
-
-<p><strong>解题思路：</strong></p>
-
-<p>因为数是出现三次的，也就是说，对于每一个二进制位，如果只出现一次的数在该二进制位为1，那么这个二进制位在全部数字中出现次数无法被3整除。
-膜3运算只有三种状态：00,01,10，因此我们可以使用两个位来表示当前位%3，对于每一位，我们让Two，One表示当前位的状态，B表示输入数字的对应位，Two+和One+表示输出状态。</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 0 0 0 0
- 0 0 1 0 1
- 0 1 0 0 1
- 0 1 1 1 0
- 1 0 0 1 0
- 1 0 1 0 0
- One+ = (One ^ B) &amp; (~Two)
- Two+ = (~One+) &amp; (Two ^ B)
-</code></pre></div></div>
-
-<p><strong>3.3.应用三</strong> <strong>数组中，只有两个数出现一次，剩下都出现两次，找出出现一次的</strong></p>
-
-<blockquote>
-  <p><a href="https://link.zhihu.com/?target=http%3A//www.lintcode.com/en/problem/single-number-iii/">http://www.lintcode.com/en/problem/single-number-iii/</a></p>
-</blockquote>
-
-<p><strong>思路解析：</strong></p>
-
-<p>有了第一题的基本的思路，我们可以将数组分成两个部分，每个部分里只有一个元素出现一次，其余元素都出现两次。那么使用这种方法就可以找出这两个元素了。
-不妨假设出现一个的两个元素是x，y，那么最终所有的元素异或的结果就是res  =  x^y。并且res！=0，那么我们可以找出res二进制表示中的某一位是1。对于原来的数组，我们可以根据这个位置是不是1就可以将数组分成两个部分。x，y在不同的两个子数组中。而且对于其他成对出现的元素，要么在x所在的那个数组，要么在y所在的那个数组。</p>
-
-	  ]]></description>
-	</item>
-
-	<item>
 	  <title>Spring 传播机制实战</title>
-	  <link>/gettysburg-address</link>
+	  <link>/spring-propagation</link>
 	  <author></author>
-	  <pubDate>1863-11-19T18:18:00+08:00</pubDate>
-	  <guid>/gettysburg-address</guid>
+	  <pubDate>2015-09-27T18:18:00+08:00</pubDate>
+	  <guid>/spring-propagation</guid>
 	  <description><![CDATA[
-	     <h2 id="spring-传播机制实战">Spring 传播机制实战</h2>
-
-<h3 id="场景佩奇要给乔治转账">场景：佩奇要给乔治转账</h3>
+	     <h3 id="场景佩奇要给乔治转账">场景：佩奇要给乔治转账</h3>
 
 <ol>
   <li>基础操作：扣钱和加钱</li>

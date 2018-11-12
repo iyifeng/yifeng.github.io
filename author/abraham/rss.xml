@@ -6,21 +6,19 @@
       <title></title>
    
    <link></link>
-   <description>A beautiful narrative written with the world's most elegant publishing platform. The story begins here.</description>
+   <description>没啥说的，就是干</description>
    <language>zh-Hans</language>
    <managingEditor> </managingEditor>
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    
 	<item>
 	  <title>Spring 传播机制实战</title>
-	  <link>/gettysburg-address</link>
+	  <link>/spring-propagation</link>
 	  <author></author>
-	  <pubDate>1863-11-19T18:18:00+08:00</pubDate>
-	  <guid>/gettysburg-address</guid>
+	  <pubDate>2015-09-27T18:18:00+08:00</pubDate>
+	  <guid>/spring-propagation</guid>
 	  <description><![CDATA[
-	     <h2 id="spring-传播机制实战">Spring 传播机制实战</h2>
-
-<h3 id="场景佩奇要给乔治转账">场景：佩奇要给乔治转账</h3>
+	     <h3 id="场景佩奇要给乔治转账">场景：佩奇要给乔治转账</h3>
 
 <ol>
   <li>基础操作：扣钱和加钱</li>

@@ -1,29 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Finding The Way Home - Articles</title>
-    <description>A beautiful narrative written with the world's most elegant publishing platform. The story begins here.</description>
+    <title>BugCoder - Articles</title>
+    <description>没啥说的，就是干</description>
     <link>
     </link>
     
       
       <item>
-        <title>位运算</title>
+        <title>Spring 传播机制实战</title>
         
-          <description>&lt;h2 id=&quot;1技巧一&quot;&gt;1.&lt;strong&gt;技巧一&lt;/strong&gt;&lt;/h2&gt;
+          <description>&lt;h3 id=&quot;场景佩奇要给乔治转账&quot;&gt;场景：佩奇要给乔治转账&lt;/h3&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;基础操作：扣钱和加钱&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 取款操作
+     * @param name 用户
+     * @param usd 钱
+     */
+	void withdrawal(String name, BigDecimal usd);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 存款操作
+     * @param name 用户
+     * @param usd 钱
+     */
+    void deposit(String name, BigDecimal usd);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;业务操作：转账，pappe给george转账10000块&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 转账服务
+     * @param oName 从该用户扣钱
+     * @param dName 向该用户加钱
+     */
+    void transfer(String oName, String dName){
+        balanceService.withdrawal(oName,new BigDecimal(10000));
+        balanceService.deposit(dName,new BigDecimal(10000));
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;##别说话，就是干&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;propagation_required&lt;/p&gt;
+
+    &lt;p&gt;Spring默认的事务传播机制，如果外层有事务则该事物加入外层事务，一起提交或回滚，如果没有事务则当前开启一个新事物，该机制满足大多数业务场景。&lt;/p&gt;
+
+    &lt;p&gt;transfer、withdrawal、deposit传播机制都设置为&lt;strong&gt;propagation_required&lt;/strong&gt;，任何一个方法抛异常，整个事务都会回滚。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 </description>
         
-        <pubDate>Sat, 27 Sep 2014 10:18:00 +0000</pubDate>
+        <pubDate>Sun, 27 Sep 2015 10:18:00 +0000</pubDate>
         <link>
-        /%E4%BD%8D%E8%BF%90%E7%AE%97%E4%B9%8B%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7</link>
-        <guid isPermaLink="true">/%E4%BD%8D%E8%BF%90%E7%AE%97%E4%B9%8B%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7</guid>
+        /spring-propagation</link>
+        <guid isPermaLink="true">/spring-propagation</guid>
       </item>
       
     
       
       <item>
-        <title>Down The Rabbit Hole</title>
+        <title>位运算</title>
         
           <description>&lt;h2 id=&quot;1技巧一&quot;&gt;1.&lt;strong&gt;技巧一&lt;/strong&gt;&lt;/h2&gt;
 
@@ -143,73 +189,10 @@ N bit Combination
 不妨假设出现一个的两个元素是x，y，那么最终所有的元素异或的结果就是res  =  x^y。并且res！=0，那么我们可以找出res二进制表示中的某一位是1。对于原来的数组，我们可以根据这个位置是不是1就可以将数组分成两个部分。x，y在不同的两个子数组中。而且对于其他成对出现的元素，要么在x所在的那个数组，要么在y所在的那个数组。&lt;/p&gt;
 </description>
         
-        <pubDate>Sun, 26 Nov 1865 10:18:00 +0000</pubDate>
+        <pubDate>Sun, 27 Sep 2015 10:18:00 +0000</pubDate>
         <link>
-        /down-the-rabbit-hole</link>
-        <guid isPermaLink="true">/down-the-rabbit-hole</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Spring 传播机制实战</title>
-        
-          <description>&lt;h2 id=&quot;spring-传播机制实战&quot;&gt;Spring 传播机制实战&lt;/h2&gt;
-
-&lt;h3 id=&quot;场景佩奇要给乔治转账&quot;&gt;场景：佩奇要给乔治转账&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;基础操作：扣钱和加钱&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
-     * 取款操作
-     * @param name 用户
-     * @param usd 钱
-     */
-	void withdrawal(String name, BigDecimal usd);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
-     * 存款操作
-     * @param name 用户
-     * @param usd 钱
-     */
-    void deposit(String name, BigDecimal usd);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;业务操作：转账，pappe给george转账10000块&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
-     * 转账服务
-     * @param oName 从该用户扣钱
-     * @param dName 向该用户加钱
-     */
-    void transfer(String oName, String dName){
-        balanceService.withdrawal(oName,new BigDecimal(10000));
-        balanceService.deposit(dName,new BigDecimal(10000));
-    }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;##别说话，就是干&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;propagation_required&lt;/p&gt;
-
-    &lt;p&gt;Spring默认的事务传播机制，如果外层有事务则该事物加入外层事务，一起提交或回滚，如果没有事务则当前开启一个新事物，该机制满足大多数业务场景。&lt;/p&gt;
-
-    &lt;p&gt;transfer、withdrawal、deposit传播机制都设置为&lt;strong&gt;propagation_required&lt;/strong&gt;，任何一个方法抛异常，整个事务都会回滚。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        
-        <pubDate>Thu, 19 Nov 1863 10:18:00 +0000</pubDate>
-        <link>
-        /gettysburg-address</link>
-        <guid isPermaLink="true">/gettysburg-address</guid>
+        /bit-operation</link>
+        <guid isPermaLink="true">/bit-operation</guid>
       </item>
       
     

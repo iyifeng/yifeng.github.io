@@ -6,17 +6,17 @@
       <title></title>
    
    <link></link>
-   <description>A beautiful narrative written with the world's most elegant publishing platform. The story begins here.</description>
+   <description>没啥说的，就是干</description>
    <language>zh-Hans</language>
    <managingEditor> </managingEditor>
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    
 	<item>
 	  <title>位运算</title>
-	  <link>/%E4%BD%8D%E8%BF%90%E7%AE%97%E4%B9%8B%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7</link>
+	  <link>/bit-operation</link>
 	  <author></author>
-	  <pubDate>2014-09-27T18:18:00+08:00</pubDate>
-	  <guid>/%E4%BD%8D%E8%BF%90%E7%AE%97%E4%B9%8B%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7</guid>
+	  <pubDate>2015-09-27T18:18:00+08:00</pubDate>
+	  <guid>/bit-operation</guid>
 	  <description><![CDATA[
 	     <h2 id="1技巧一">1.<strong>技巧一</strong></h2>
 
