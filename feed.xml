@@ -25,55 +25,122 @@
       <item>
         <title>Down The Rabbit Hole</title>
         
-          <description>&lt;p&gt;Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, ‘and what is the use of a book,’ thought Alice ‘without pictures or conversation?’&lt;/p&gt;
+          <description>&lt;h2 id=&quot;1技巧一&quot;&gt;1.&lt;strong&gt;技巧一&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;So she was considering in her own mind (as well as she could, for the hot day made her feel very sleepy and stupid), whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her.&lt;/p&gt;
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;x &amp;amp; (x - 1) 用于消去x最后一位的1
+x = 1100
+x - 1 = 1011
+x &amp;amp; (x - 1) = 1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;There was nothing so very remarkable in that; nor did Alice think it so very much out of the way to hear the Rabbit say to itself, ‘Oh dear! Oh dear! I shall be late!’ (when she thought it over afterwards, it occurred to her that she ought to have wondered at this, but at the time it all seemed quite natural); but when the Rabbit actually took a watch out of its waistcoat-pocket, and looked at it, and then hurried on, Alice started to her feet, for it flashed across her mind that she had never before seen a rabbit with either a waistcoat-pocket, or a watch to take out of it, and burning with curiosity, she ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.1.应用一&lt;/strong&gt; &lt;strong&gt;用 O(1) 时间检测整数 n 是否是 2 的幂次。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;In another moment down went Alice after it, never once considering how in the world she was to get out again.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/o1-check-power-of-2/&quot;&gt;http://www.lintcode.com/zh-cn/problem/o1-check-power-of-2/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;The rabbit-hole went straight on like a tunnel for some way, and then dipped suddenly down, so suddenly that Alice had not a moment to think about stopping herself before she found herself falling down a very deep well.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路解析：&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Either the well was very deep, or she fell very slowly, for she had plenty of time as she went down to look about her and to wonder what was going to happen next. First, she tried to look down and make out what she was coming to, but it was too dark to see anything; then she looked at the sides of the well, and noticed that they were filled with cupboards and book-shelves; here and there she saw maps and pictures hung upon pegs. She took down a jar from one of the shelves as she passed; it was labelled ‘ORANGE MARMALADE’, but to her great disappointment it was empty: she did not like to drop the jar for fear of killing somebody, so managed to put it into one of the cupboards as she fell past it.&lt;/p&gt;
+&lt;p&gt;N如果是2的幂次，则N满足两个条件。
+  1.N &amp;gt;0 
+  2.N的二进制表示中只有一个1
+因为N的二进制表示中只有一个1，所以使用N &amp;amp; (N - 1)将N唯一的一个1消去，应该返回0。&lt;/p&gt;
 
-&lt;p&gt;‘Well!’ thought Alice to herself, ‘after such a fall as this, I shall think nothing of tumbling down stairs! How brave they’ll all think me at home! Why, I wouldn’t say anything about it, even if I fell off the top of the house!’ (Which was very likely true.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.2.应用二&lt;/strong&gt; &lt;strong&gt;计算在一个 32 位的整数的二进制表式中有多少个 1。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Down, down, down. Would the fall never come to an end! ‘I wonder how many miles I’ve fallen by this time?’ she said aloud. ‘I must be getting somewhere near the centre of the earth. Let me see: that would be four thousand miles down, I think—’ (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) ‘—yes, that’s about the right distance—but then I wonder what Latitude or Longitude I’ve got to?’ (Alice had no idea what Latitude was, or Longitude either, but thought they were nice grand words to say.)&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/count-1-in-binary/&quot;&gt;http://www.lintcode.com/zh-cn/problem/count-1-in-binary/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Presently she began again. ‘I wonder if I shall fall right through the earth! How funny it’ll seem to come out among the people that walk with their heads downward! The Antipathies, I think—’ (she was rather glad there was no one listening, this time, as it didn’t sound at all the right word) ‘—but I shall have to ask them what the name of the country is, you know. Please, Ma’am, is this New Zealand or Australia?’ (and she tried to curtsey as she spoke—fancy curtseying as you’re falling through the air! Do you think you could manage it?) ‘And what an ignorant little girl she’ll think me for asking! No, it’ll never do to ask: perhaps I shall see it written up somewhere.’&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路解析：&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Down, down, down. There was nothing else to do, so Alice soon began talking again. ‘Dinah’ll miss me very much to-night, I should think!’ (Dinah was the cat.) ‘I hope they’ll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me! There are no mice in the air, I’m afraid, but you might catch a bat, and that’s very like a mouse, you know. But do cats eat bats, I wonder?’ And here Alice began to get rather sleepy, and went on saying to herself, in a dreamy sort of way, ‘Do cats eat bats? Do cats eat bats?’ and sometimes, ‘Do bats eat cats?’ for, you see, as she couldn’t answer either question, it didn’t much matter which way she put it. She felt that she was dozing off, and had just begun to dream that she was walking hand in hand with Dinah, and saying to her very earnestly, ‘Now, Dinah, tell me the truth: did you ever eat a bat?’ when suddenly, thump! thump! down she came upon a heap of sticks and dry leaves, and the fall was over.&lt;/p&gt;
+&lt;p&gt;由x &amp;amp; (x - 1)消去x最后一位的1可知。不断使用 x &amp;amp; (x - 1) 消去x最后一位的1，计算总共消去了多少次即可。&lt;/p&gt;
 
-&lt;p&gt;Alice was not a bit hurt, and she jumped up on to her feet in a moment: she looked up, but it was all dark overhead; before her was another long passage, and the White Rabbit was still in sight, hurrying down it. There was not a moment to be lost: away went Alice like the wind, and was just in time to hear it say, as it turned a corner, ‘Oh my ears and whiskers, how late it’s getting!’ She was close behind it when she turned the corner, but the Rabbit was no longer to be seen: she found herself in a long, low hall, which was lit up by a row of lamps hanging from the roof.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.3.应用三&lt;/strong&gt; &lt;strong&gt;如果要将整数A转换为B，需要改变多少个bit位？&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;There were doors all round the hall, but they were all locked; and when Alice had been all the way down one side and up the other, trying every door, she walked sadly down the middle, wondering how she was ever to get out again.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/flip-bits/&quot;&gt;http://www.lintcode.com/zh-cn/problem/flip-bits/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;Suddenly she came upon a little three-legged table, all made of solid glass; there was nothing on it except a tiny golden key, and Alice’s first thought was that it might belong to one of the doors of the hall; but, alas! either the locks were too large, or the key was too small, but at any rate it would not open any of them.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解题思路：&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;However, on the second time round, she came upon a low curtain she had not noticed before, and behind it was a little door about fifteen inches high: she tried the little golden key in the lock, and to her great delight it fitted!&lt;/p&gt;
+&lt;p&gt;这个应用是上面一个应用的拓展。
+思考将整数A转换为B，如果A和B在第i（0&amp;lt;=i&amp;lt;32）个位上相等，则不需要改变这个BIT位，如果在第i位上不相等，则需要改变这个BIT位。所以问题转化为了A和B有多少个BIT位不相同。联想到位运算有一个异或操作，相同为0，相异为1，所以问题转变成了计算A异或B之后这个数中1的个数。&lt;/p&gt;
 
-&lt;p&gt;Alice opened the door and found that it led into a small passage, not much larger than a rat-hole: she knelt down and looked along the passage into the loveliest garden you ever saw. How she longed to get out of that dark hall, and wander about among those beds of bright flowers and those cool fountains, but she could not even get her head though the doorway; ‘and even if my head would go through,’ thought poor Alice, ‘it would be of very little use without my shoulders. Oh, how I wish I could shut up like a telescope! I think I could, if I only know how to begin.’ For, you see, so many out-of-the-way things had happened lately, that Alice had begun to think that very few things indeed were really impossible.&lt;/p&gt;
+&lt;h2 id=&quot;2技巧二&quot;&gt;2&lt;strong&gt;技巧二&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;There seemed to be no use in waiting by the little door, so she went back to the table, half hoping she might find another key on it, or at any rate a book of rules for shutting people up like telescopes: this time she found a little bottle on it, (‘which certainly was not here before,’ said Alice,) and round the neck of the bottle was a paper label, with the words ‘DRINK ME’ beautifully printed on it in large letters.&lt;/p&gt;
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;使用二进制进行子集枚举
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;It was all very well to say ‘Drink me,’ but the wise little Alice was not going to do that in a hurry. ‘No, I’ll look first,’ she said, ‘and see whether it’s marked “poison” or not’; for she had read several nice little histories about children who had got burnt, and eaten up by wild beasts and other unpleasant things, all because they would not remember the simple rules their friends had taught them: such as, that a red-hot poker will burn you if you hold it too long; and that if you cut your finger very deeply with a knife, it usually bleeds; and she had never forgotten that, if you drink much from a bottle marked ‘poison,’ it is almost certain to disagree with you, sooner or later.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;应用&lt;/strong&gt; &lt;strong&gt;给定一个含不同整数的集合，返回其所有的子集。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;However, this bottle was not marked ‘poison,’ so Alice ventured to taste it, and finding it very nice, (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pine-apple, roast turkey, toffee, and hot buttered toast,) she very soon finished it off.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.lintcode.com/zh-cn/problem/subsets/&quot;&gt;http://www.lintcode.com/zh-cn/problem/subsets/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;‘What a curious feeling!’ said Alice; ‘I must be shutting up like a telescope.’&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解题思路：&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;And so it was indeed: she was now only ten inches high, and her face brightened up at the thought that she was now the right size for going through the little door into that lovely garden. First, however, she waited for a few minutes to see if she was going to shrink any further: she felt a little nervous about this; ‘for it might end, you know,’ said Alice to herself, ‘in my going out altogether, like a candle. I wonder what I should be like then?’ And she tried to fancy what the flame of a candle is like after the candle is blown out, for she could not remember ever having seen such a thing.&lt;/p&gt;
+&lt;p&gt;思路就是使用一个正整数二进制表示的第i位是1还是0，代表集合的第i个数取或者不取。
+所以从0到2^n-1总共2^n个整数，正好对应集合的2^n个子集。&lt;/p&gt;
 
-&lt;p&gt;After a while, finding that nothing more happened, she decided on going into the garden at once; but, alas for poor Alice! when she got to the door, she found she had forgotten the little golden key, and when she went back to the table for it, she found she could not possibly reach it: she could see it quite plainly through the glass, and she tried her best to climb up one of the legs of the table, but it was too slippery; and when she had tired herself out with trying, the poor little thing sat down and cried.&lt;/p&gt;
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;S = {1,2,3}
+N bit Combination
+0 000 {}
+1 001 {1}
+2 010 {2}
+3 011 {1,2}
+4 100 {3}
+5 101 {1,3}
+6 110 {2,3}
+7 111 {1,2,3}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;‘Come, there’s no use in crying like that!’ said Alice to herself, rather sharply; ‘I advise you to leave off this minute!’ She generally gave herself very good advice, (though she very seldom followed it), and sometimes she scolded herself so severely as to bring tears into her eyes; and once she remembered trying to box her own ears for having cheated herself in a game of croquet she was playing against herself, for this curious child was very fond of pretending to be two people. ‘But it’s no use now,’ thought poor Alice, ‘to pretend to be two people! Why, there’s hardly enough of me left to make one respectable person!’&lt;/p&gt;
+&lt;h2 id=&quot;3技巧三&quot;&gt;3&lt;strong&gt;技巧三&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;Soon her eye fell on a little glass box that was lying under the table: she opened it, and found in it a very small cake, on which the words ‘EAT ME’ were beautifully marked in currants. ‘Well, I’ll eat it,’ said Alice, ‘and if it makes me grow larger, I can reach the key; and if it makes me grow smaller, I can creep under the door; so either way I’ll get into the garden, and I don’t care which happens!’&lt;/p&gt;
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a ^ b ^ b = a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;She ate a little bit, and said anxiously to herself, ‘Which way? Which way?’, holding her hand on the top of her head to feel which way it was growing, and she was quite surprised to find that she remained the same size: to be sure, this generally happens when one eats cake, but Alice had got so much into the way of expecting nothing but out-of-the-way things to happen, that it seemed quite dull and stupid for life to go on in the common way.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3.1.应用一&lt;/strong&gt; &lt;strong&gt;数组中，只有一个数出现一次，剩下都出现两次，找出出现一次的数&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;So she set to work, and very soon finished off the cake.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.lintcode.com/en/problem/single-number/&quot;&gt;http://www.lintcode.com/en/problem/single-number/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;思路解析：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;因为只有一个数恰好出现一个，剩下的都出现过两次，所以只要将所有的数异或起来，就可以得到唯一的那个数。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.2.应用二&lt;/strong&gt; &lt;strong&gt;数组中，只有一个数出现一次，剩下都出现三次，找出出现一次的。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.lintcode.com/en/problem/single-number-iii/&quot;&gt;http://www.lintcode.com/en/problem/single-number-iii/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;解题思路：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;因为数是出现三次的，也就是说，对于每一个二进制位，如果只出现一次的数在该二进制位为1，那么这个二进制位在全部数字中出现次数无法被3整除。
+膜3运算只有三种状态：00,01,10，因此我们可以使用两个位来表示当前位%3，对于每一位，我们让Two，One表示当前位的状态，B表示输入数字的对应位，Two+和One+表示输出状态。&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 0 0 0 0
+ 0 0 1 0 1
+ 0 1 0 0 1
+ 0 1 1 1 0
+ 1 0 0 1 0
+ 1 0 1 0 0
+ One+ = (One ^ B) &amp;amp; (~Two)
+ Two+ = (~One+) &amp;amp; (Two ^ B)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;3.3.应用三&lt;/strong&gt; &lt;strong&gt;数组中，只有两个数出现一次，剩下都出现两次，找出出现一次的&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://link.zhihu.com/?target=http%3A//www.lintcode.com/en/problem/single-number-iii/&quot;&gt;http://www.lintcode.com/en/problem/single-number-iii/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;思路解析：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;有了第一题的基本的思路，我们可以将数组分成两个部分，每个部分里只有一个元素出现一次，其余元素都出现两次。那么使用这种方法就可以找出这两个元素了。
+不妨假设出现一个的两个元素是x，y，那么最终所有的元素异或的结果就是res  =  x^y。并且res！=0，那么我们可以找出res二进制表示中的某一位是1。对于原来的数组，我们可以根据这个位置是不是1就可以将数组分成两个部分。x，y在不同的两个子数组中。而且对于其他成对出现的元素，要么在x所在的那个数组，要么在y所在的那个数组。&lt;/p&gt;
 </description>
         
         <pubDate>Sun, 26 Nov 1865 10:18:00 +0000</pubDate>
@@ -85,13 +152,58 @@
     
       
       <item>
-        <title>Gettysburg Address</title>
+        <title>Spring 传播机制实战</title>
         
-          <description>&lt;p&gt;Fourscore and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.&lt;/p&gt;
+          <description>&lt;h2 id=&quot;spring-传播机制实战&quot;&gt;Spring 传播机制实战&lt;/h2&gt;
 
-&lt;p&gt;Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.&lt;/p&gt;
+&lt;h3 id=&quot;场景佩奇要给乔治转账&quot;&gt;场景：佩奇要给乔治转账&lt;/h3&gt;
 
-&lt;p&gt;But, in a larger sense, we can not dedicate-we can not consecrate-we can not hallow-this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us-that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion-that we here highly resolve that these dead shall not have died in vain-that this nation, under God, shall have a new birth of freedom-and that government of the people, by the people, for the people shall not perish from the earth.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;基础操作：扣钱和加钱&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 取款操作
+     * @param name 用户
+     * @param usd 钱
+     */
+	void withdrawal(String name, BigDecimal usd);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 存款操作
+     * @param name 用户
+     * @param usd 钱
+     */
+    void deposit(String name, BigDecimal usd);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;业务操作：转账，pappe给george转账10000块&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	/**
+     * 转账服务
+     * @param oName 从该用户扣钱
+     * @param dName 向该用户加钱
+     */
+    void transfer(String oName, String dName){
+        balanceService.withdrawal(oName,new BigDecimal(10000));
+        balanceService.deposit(dName,new BigDecimal(10000));
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;##别说话，就是干&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;propagation_required&lt;/p&gt;
+
+    &lt;p&gt;Spring默认的事务传播机制，如果外层有事务则该事物加入外层事务，一起提交或回滚，如果没有事务则当前开启一个新事物，该机制满足大多数业务场景。&lt;/p&gt;
+
+    &lt;p&gt;transfer、withdrawal、deposit传播机制都设置为&lt;strong&gt;propagation_required&lt;/strong&gt;，任何一个方法抛异常，整个事务都会回滚。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 </description>
         
         <pubDate>Thu, 19 Nov 1863 10:18:00 +0000</pubDate>

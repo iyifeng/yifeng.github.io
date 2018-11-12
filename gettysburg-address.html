@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Page Meta -->
-    <title>Gettysburg Address</title>
+    <title>Spring 传播机制实战</title>
     <meta name="description" content="A beautiful narrative written with the world's most elegant publishing platform. The story begins here." />
 
     <!-- Mobile Meta -->
@@ -32,13 +32,13 @@
 
     <meta property="og:site_name" content="Finding The Way Home" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Gettysburg Address" />
+    <meta property="og:title" content="Spring 传播机制实战" />
     <meta property="og:description" content="A beautiful narrative written with the world's most elegant publishing platform. The story begins here." />
     <meta property="og:url" content="/gettysburg-address" />
     <meta property="og:image" content="assets/images/cover1.jpg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Gettysburg Address" />
+    <meta name="twitter:title" content="Spring 传播机制实战" />
     <meta name="twitter:description" content="A beautiful narrative written with the world's most elegant publishing platform. The story begins here." />
     <meta name="twitter:url" content="/gettysburg-address" />
     <meta name="twitter:image:src" content="assets/images/cover1.jpg" />
@@ -48,7 +48,7 @@
     "@context": "http://schema.org",
     "@type": "Website",
     "publisher": "Finding The Way Home",
-    "name": "Gettysburg Address",
+    "name": "Spring 传播机制实战",
     "url": "/gettysburg-address",
     "image": "assets/images/cover1.jpg",
     "description": "A beautiful narrative written with the world's most elegant publishing platform. The story begins here."
@@ -108,7 +108,7 @@
     <article class="post tag-fiction">
 
         <header class="post-header">
-            <h1 class="post-title">Gettysburg Address</h1>
+            <h1 class="post-title">Spring 传播机制实战</h1>
             <section class="post-meta">
             <!-- <a href=''></a> -->
 
@@ -130,11 +130,56 @@
 
         <section class="post-content">
 
-            <p>Fourscore and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.</p>
+            <h2 id="spring-传播机制实战">Spring 传播机制实战</h2>
 
-<p>Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.</p>
+<h3 id="场景佩奇要给乔治转账">场景：佩奇要给乔治转账</h3>
 
-<p>But, in a larger sense, we can not dedicate-we can not consecrate-we can not hallow-this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us-that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion-that we here highly resolve that these dead shall not have died in vain-that this nation, under God, shall have a new birth of freedom-and that government of the people, by the people, for the people shall not perish from the earth.</p>
+<ol>
+  <li>基础操作：扣钱和加钱</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	/**
+     * 取款操作
+     * @param name 用户
+     * @param usd 钱
+     */
+	void withdrawal(String name, BigDecimal usd);
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	/**
+     * 存款操作
+     * @param name 用户
+     * @param usd 钱
+     */
+    void deposit(String name, BigDecimal usd);
+</code></pre></div></div>
+
+<ol>
+  <li>业务操作：转账，pappe给george转账10000块</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	/**
+     * 转账服务
+     * @param oName 从该用户扣钱
+     * @param dName 向该用户加钱
+     */
+    void transfer(String oName, String dName){
+        balanceService.withdrawal(oName,new BigDecimal(10000));
+        balanceService.deposit(dName,new BigDecimal(10000));
+    }
+</code></pre></div></div>
+
+<p>##别说话，就是干</p>
+
+<ol>
+  <li>
+    <p>propagation_required</p>
+
+    <p>Spring默认的事务传播机制，如果外层有事务则该事物加入外层事务，一起提交或回滚，如果没有事务则当前开启一个新事物，该机制满足大多数业务场景。</p>
+
+    <p>transfer、withdrawal、deposit传播机制都设置为<strong>propagation_required</strong>，任何一个方法抛异常，整个事务都会回滚。</p>
+  </li>
+</ol>
 
 
         </section>
@@ -163,7 +208,7 @@
         <a class="read-next-story " style="background-image: url(assets/images/cover1.jpg)" href="down-the-rabbit-hole">
             <section class="post">
                 <h2>Down The Rabbit Hole</h2>
-                <p>Alice was beginning to get very tired of sitting by her sister on the bank,...</p>
+                <p>## 1.**技巧一** ```text x & (x - 1) 用于消去x最后一位的1 x = 1100 x - 1...</p>
             </section>
         </a>
     
