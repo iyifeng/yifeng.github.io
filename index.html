@@ -75,10 +75,6 @@
         <li class="nav-speeches " role="presentation"><a href="tag/speeches">Speeches</a></li>
         <li class="nav-fiction " role="presentation"><a href="tag/fiction">Fiction</a></li>
         <li class="nav-author " role="presentation"><a href="author/casper">Casper</a></li>
-        <li class="nav-author " role="presentation"><a href="author/edgar">Edgar</a></li>
-        <li class="nav-author " role="presentation"><a href="author/abraham">Abraham</a></li>
-        <li class="nav-author " role="presentation"><a href="author/martin">Martin</a></li>
-        <li class="nav-author " role="presentation"><a href="author/lewis">Lewis</a></li>
     </ul>
     <a class="subscribe-button icon-feed" href="feed.xml">Subscribe</a>
 </div>
@@ -128,10 +124,64 @@
     
     <article class="post">
         <header class="post-header">
+            <h2 class="post-title"><a href="balancing-1">负载均衡实现方式</a></h2>
+        </header>
+        <section class="post-excerpt">
+            <p>一、负载均衡的基本概念 负载均衡是指，将请求分发到 多台 应用服务器，以此来分散 压力的一种架构方式，他是以集群的方式存在，并且当 某个节点挂掉的时候，可以自动 不再将请求分配到此节点。 二、 实现方式 重定向 这种方式，是通过将请求全部发送到前置机，由前置机通过算法 得出要分配给那台 应用服务器，然后响应给客户端，由客户端重定向到应用服务器的一种方式。 这种方式，由于每一个的请求，都要重定向一下，所以效率不是很高 反向代理 这种方式，是通过在前置机，使用反向代理的方式，将请求分发到应用服务器，客户端无需再请求一次，实现方式通常有两种，一种是用交换机实现，还有一种是用nginx这一类的软件实现 这种方式，由于不需要再次重定向，所以较第一种，效率较高，但是由于请求和响应都是通过前置机来的，所以对前置机的考验很大 数据链路返回 这种方式，通过给应用服务器设置虚拟IP，然后通过修改mac地址的方式，将请求分发出去，而应用服务器 收到请求后，可以直接响应给客户端，而不需要经过前置机。 这种方式，由于 前置机 只需要接受请求，不需要响应数据，所以，效率较第二种较高。 三、 负载均衡算法 轮询法... <a class="read-more" href="balancing-1">&raquo;</a></p>
+        </section>
+        <footer class="post-meta">
+            
+                
+            
+
+            <!-- [[tags prefix=" on "]] -->
+            
+                on
+                
+                    
+                       <a href='tag/distributed'>Distributed</a>
+                    
+                
+            
+            <time class="post-date" datetime="2016-08-21">21 Aug 2016</time>
+        </footer>
+    </article>
+    
+    <article class="post">
+        <header class="post-header">
+            <h2 class="post-title"><a href="design-singleton">设计模式-单例模式</a></h2>
+        </header>
+        <section class="post-excerpt">
+            <p>###创建型模式-单例模式 为实现类的唯一性，我们需要通过如下三个步骤对该类进行重构： 为了确保实例的唯一性，我们需要禁止类的外部直接使用new来创建对象，因此需要将类的构造函数的可见性改为private，如下所示： private Singleton(){} 虽然类的外部无法使用new来创建对象，但是在Singleton的内部还是可以创建的，可见性只对类外有效。因此，我们可以在Singleton中创建并保存这个唯一实例。为了让外界可以访问这个唯一实例，需要在Singleton中定义一个静态的Singleton类型的私有成员变量，如下所示： private static Singleton singleton = null; 为了保证成员变量的封装性，我们将Singleton类型的singleton对象的可见性设置为private，但是外界该如何使用该成员变量并何时实例化该成员变量呢？那就是增加一个公有的静态方法，如下所示 public static Singleton getInstance(){ if(null == singleton){ singleton = new Singleton(); } return... <a class="read-more" href="design-singleton">&raquo;</a></p>
+        </section>
+        <footer class="post-meta">
+            
+                
+            
+
+            <!-- [[tags prefix=" on "]] -->
+            
+                on
+                
+                    
+                       <a href='tag/design'>Design</a>,
+                    
+                
+                    
+                       <a href='tag/mode'>Mode</a>
+                    
+                
+            
+            <time class="post-date" datetime="2016-06-21">21 Jun 2016</time>
+        </footer>
+    </article>
+    
+    <article class="post">
+        <header class="post-header">
             <h2 class="post-title"><a href="spring-propagation">Spring 传播机制实战</a></h2>
         </header>
         <section class="post-excerpt">
-            <p>场景：佩奇要给乔治转账 基础操作：扣钱和加钱 /** * 取款操作 * @param name 用户 * @param usd 钱 */ void withdrawal(String name, BigDecimal usd); /** * 存款操作 * @param name 用户... <a class="read-more" href="spring-propagation">&raquo;</a></p>
+            <p>&amp;nbsp 场景：佩奇要给乔治转账 基础操作：扣钱和加钱 /** * 取款操作 * @param name 用户 * @param usd 钱 */ void withdrawal(String name, BigDecimal usd); /** * 存款操作 * @param name... <a class="read-more" href="spring-propagation">&raquo;</a></p>
         </section>
         <footer class="post-meta">
             

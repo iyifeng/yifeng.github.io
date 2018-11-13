@@ -8,9 +8,40 @@
     
       
       <item>
+        <title>负载均衡实现方式</title>
+        
+          <description>&lt;h2 id=&quot;一负载均衡的基本概念&quot;&gt;一、负载均衡的基本概念&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Sun, 21 Aug 2016 13:32:00 +0000</pubDate>
+        <link>
+        /balancing-1</link>
+        <guid isPermaLink="true">/balancing-1</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>设计模式-单例模式</title>
+        
+          <description>&lt;p&gt;###创建型模式-单例模式&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 21 Jun 2016 11:18:00 +0000</pubDate>
+        <link>
+        /design-singleton</link>
+        <guid isPermaLink="true">/design-singleton</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Spring 传播机制实战</title>
         
-          <description>&lt;h3 id=&quot;场景佩奇要给乔治转账&quot;&gt;场景：佩奇要给乔治转账&lt;/h3&gt;
+          <description>&lt;p&gt;&amp;amp;nbsp&lt;/p&gt;
+&lt;h3 id=&quot;场景佩奇要给乔治转账&quot;&gt;场景：佩奇要给乔治转账&lt;/h3&gt;
 
 &lt;ol&gt;
   &lt;li&gt;基础操作：扣钱和加钱&lt;/li&gt;

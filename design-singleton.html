@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Page Meta -->
+    <title>设计模式-单例模式</title>
+    <meta name="description" content="没啥说的，就是干" />
+
+    <!-- Mobile Meta -->
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Brand icon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" >
+
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="assets/css/syntax.css" />
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!-- Ghost outputs important style and meta data with this tag -->
+        <link rel="canonical" href="/design-singleton" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="page2/" />
+
+    <meta property="og:site_name" content="BugCoder" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="设计模式-单例模式" />
+    <meta property="og:description" content="没啥说的，就是干" />
+    <meta property="og:url" content="/design-singleton" />
+    <meta property="og:image" content="assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="设计模式-单例模式" />
+    <meta name="twitter:description" content="没啥说的，就是干" />
+    <meta name="twitter:url" content="/design-singleton" />
+    <meta name="twitter:image:src" content="assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "BugCoder",
+    "name": "设计模式-单例模式",
+    "url": "/design-singleton",
+    "image": "assets/images/cover1.jpg",
+    "description": "没啥说的，就是干"
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="BugCoder" href="feed.xml" />
+
+
+</head>
+<body class="home-template nav-closed">
+
+    <!-- The blog navigation links -->
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        <li class="nav-home " role="presentation"><a href="">Home</a></li>
+        <li class="nav-about " role="presentation"><a href="about">About</a></li>
+        <li class="nav-fables " role="presentation"><a href="tag/fables">Fables</a></li>
+        <li class="nav-speeches " role="presentation"><a href="tag/speeches">Speeches</a></li>
+        <li class="nav-fiction " role="presentation"><a href="tag/fiction">Fiction</a></li>
+        <li class="nav-author " role="presentation"><a href="author/casper">Casper</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="feed.xml">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The comment above "< default" means - insert everything in this file into -->
+    <!-- the [body] of the default.hbs template, which contains our header/footer. -->
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post tag-fiction">
+
+        <header class="post-header">
+            <h1 class="post-title">设计模式-单例模式</h1>
+            <section class="post-meta">
+            <!-- <a href=''></a> -->
+
+            
+                
+            
+            <time class="post-date" datetime="2016-06-21">21 Jun 2016</time>
+                <!-- [[tags prefix=" on "]] -->
+                
+                on
+                
+                    
+                       <a href='tag/design'>Design</a>,
+                    
+                
+                    
+                       <a href='tag/mode'>Mode</a>
+                    
+                
+                
+            </section>
+        </header>
+
+        <section class="post-content">
+
+            <p>###创建型模式-单例模式</p>
+
+<p>为实现类的唯一性，我们需要通过如下三个步骤对该类进行重构：</p>
+
+<ol>
+  <li>
+    <p>为了确保实例的唯一性，我们需要禁止类的外部直接使用new来创建对象，因此需要将类的构造函数的可见性改为private，如下所示：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private Singleton(){}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>虽然类的外部无法使用new来创建对象，但是在Singleton的内部还是可以创建的，可见性只对类外有效。因此，我们可以在Singleton中创建并保存这个唯一实例。为了让外界可以访问这个唯一实例，需要在Singleton中定义一个静态的Singleton类型的私有成员变量，如下所示：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private static Singleton singleton = null;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>为了保证成员变量的封装性，我们将Singleton类型的singleton对象的可见性设置为private，但是外界该如何使用该成员变量并何时实例化该成员变量呢？那就是增加一个公有的静态方法，如下所示</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static Singleton getInstance(){
+    if(null == singleton){
+        singleton = new Singleton();
+    }
+    return singleton;
+}
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>单例模式有三个要点：一是某个类只能有一个实例；二是它必须自行创建这个实例；三是它必须自行向整个系统提供这个实例。</p>
+
+<p>上述单例模式在多线程下也会出现获取实例不相同的情况，究其原因，当第一次调用getInstance()方法时，，金探测对象为null，因此系统将执行代码instance = new Singleton()，在此过程中，由于要对Singleton进行大量初始化工作，需要一段使劲来创建Singleton对象。而在此时，如果再一次调用getinstance()方法，由于instance尚未创建成功，仍为null，因此instance = new Singelton()将再次执行，导致最终创建了多个instance对象。</p>
+
+<p>有两种方案可以解决上述问题，饿汉模式和懒汉模式</p>
+
+<p><strong>饿汉模式</strong>直接上代码：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>饿汉模式
+class Singleton{
+    private static final Singleton instance = new Singleton();
+    private Singleton(){}
+    public static Singleton getInstance(){
+        return intance;
+    }
+}
+</code></pre></div></div>
+
+<p>多线程模式下，饿汉模式不会出现创建多个单例对象的情况，可以确保单例对象的唯一性。</p>
+
+<p><strong>懒汉模式</strong>直接上代码：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Singleton{
+    private static Singleton instance = null;
+    private Singleton(){}
+    public static Singleton getInstance(){
+        if(null == instance){
+            synchronized(Singleton.class){
+                instance = new Singleton();
+            }
+        }
+        return instance;
+    }
+}
+</code></pre></div></div>
+
+<p>多线程情况下，上述懒汉模式还是会出现单例对象不唯一的情况，加入线程A进入synchronized锁定代码，线程B处于排队等待状态。但是当A执行完毕时，线程B并不知道实例已经创建，线程B继续创建实例，会导致产生多个单例对象。进一步改进，在synchronized中再进行一次判断，这种方式称为双重检查锁定(Double-Check Locking)。代码如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Singleton{
+    private volatile static Singleton instance = null;
+    private Singleton(){}
+    public static Singleton getInstance(){
+        if(null == instance){
+            synchronized(Singleton.class){
+                if(null == instance){
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+</code></pre></div></div>
+
+<p>需要注意的是，如果使用双重检查锁定来实现懒汉模式，需要在静态成员变量instance之前增加修饰符volatile，被volatile修饰的成员变量可以确保多个线程都能够正确处理。由于volatile关键字会屏蔽Java虚拟机所做的一些代码优化，可能会导致系统运行效率降低。</p>
+
+<p>可以从资源利用效率和资源初始化耗时两方面比较饿汉模式和懒汉模式的优劣。</p>
+
+<p>有没有一种方式，可以克服两种模式的缺点呢，是的，有！</p>
+
+<p>Initialization Demand Holder（IoDH），在IoDH中，我们在单例类中增加一个静态（static）内部类，在该类内部创建单例对象，再将该单例对象通过getInstance()方法返回给外部使用，代码如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Singleton{
+    private Singleton(){}
+    private static class HolderClass{
+        private final static Singleton instance = new Singleton();
+    }
+    public static Singleton getInstance(){
+        return HolderClass.instance;
+    }
+}
+</code></pre></div></div>
+
+<p>通过使用IoDH，既可以实现延迟加载，又可以保证线程安全，不影响系统性能，不失为一种好的单例模式实现方式，其缺点是与编程语言本身的特性相关，很多面向对象的语言不支持IoDH。</p>
+
+
+        </section>
+
+        <footer class="post-footer">
+
+            <!-- Everything inside the #author tags pulls data from the author -->
+            <!-- #author-->
+            
+                
+            
+
+            <!-- Add Disqus Comments -->
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+
+    <!-- [[! next_post ]] -->
+    
+        <a class="read-next-story no-cover" href="balancing-1">
+            <section class="post">
+                <h2>负载均衡实现方式</h2>
+                <p>## 一、负载均衡的基本概念 负载均衡是指，将请求分发到 多台 应用服务器，以此来分散 压力的一种架构方式，他是以集群的方式存在，并且当 某个节点挂掉的时候，可以自动 不再将请求分配到此节点。 ## 二、 实现方式 1. 重定向 这种方式，是通过将请求全部发送到前置机，由前置机通过算法 得出要分配给那台...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /next_post ]] -->
+    <!-- [[! prev_post ]] -->
+    
+        <a class="read-next-story prev no-cover" href="spring-propagation">
+            <section class="post">
+                <h2>Spring 传播机制实战</h2>
+                <p>&amp;nbsp 场景：佩奇要给乔治转账 基础操作：扣钱和加钱 /** * 取款操作 * @param name 用户 * @param usd 钱 */...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /prev_post ]] -->
+</aside>
+
+<!-- /post -->
+
+
+        <!-- The tiny footer at the very bottom -->
+        <footer class="site-footer clearfix">
+          <section class="copyright"><a href="">BugCoder</a> &copy; 2018</section>
+          <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/jekyller/jasper">Jasper</a></section>
+        </footer>
+    </div>
+    <!-- highlight.js -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- jQuery needs to come before `` so that jQuery can be used in code injection -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Ghost outputs important scripts and data with this tag -->
+    <!--  -->
+    <!-- Add Google Analytics  -->
+        <!-- Google Analytics Tracking code -->
+     <script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	    ga('create', 'UA-69281367-1', 'auto');
+	    ga('send', 'pageview');
+
+     </script>
+    <!-- Fitvids makes video embeds responsive and awesome -->
+    <script type="text/javascript" src="assets/js/jquery.fitvids.js"></script>
+    <!-- The main JavaScript file for Casper -->
+    <script type="text/javascript" src="assets/js/index.js"></script>
+
+</body>
+</html>
