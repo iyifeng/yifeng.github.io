@@ -12,6 +12,73 @@
         
           <description>&lt;h2 id=&quot;一负载均衡的基本概念&quot;&gt;一、负载均衡的基本概念&lt;/h2&gt;
 
+&lt;p&gt;负载均衡是指，将请求分发到 多台 应用服务器，以此来分散 压力的一种架构方式，他是以集群的方式存在，并且当 某个节点挂掉的时候，可以自动 不再将请求分配到此节点。&lt;/p&gt;
+
+&lt;h2 id=&quot;二-实现方式&quot;&gt;二、 实现方式&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;重定向&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这种方式，是通过将请求全部发送到前置机，由前置机通过算法 得出要分配给那台 应用服务器，然后响应给客户端，由客户端重定向到应用服务器的一种方式。&lt;/p&gt;
+
+&lt;p&gt;这种方式，由于每一个的请求，都要重定向一下，所以效率不是很高&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;反向代理&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这种方式，是通过在前置机，使用反向代理的方式，将请求分发到应用服务器，客户端无需再请求一次，实现方式通常有两种，一种是用交换机实现，还有一种是用nginx这一类的软件实现&lt;/p&gt;
+
+&lt;p&gt;这种方式，由于不需要再次重定向，所以较第一种，效率较高，但是由于请求和响应都是通过前置机来的，所以对前置机的考验很大&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数据链路返回&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这种方式，通过给应用服务器设置虚拟IP，然后通过修改mac地址的方式，将请求分发出去，而应用服务器 收到请求后，可以直接响应给客户端，而不需要经过前置机。&lt;/p&gt;
+
+&lt;p&gt;这种方式，由于 前置机 只需要接受请求，不需要响应数据，所以，效率较第二种较高。&lt;/p&gt;
+
+&lt;h2 id=&quot;三-负载均衡算法&quot;&gt;三、 负载均衡算法&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;轮询法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;将请求按顺序轮流地分配到后端服务器上，它均衡地对待后端的每一台服务器，而不关心服务器实际的连接数和当前的系统负载。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;随机法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;通过系统的随机算法，根据后端服务器的列表大小值来随机选取其中的一台服务器进行访问。由概率统计理论可以得知，随着客户端调用服务端的次数增多，&lt;/p&gt;
+
+&lt;p&gt;其实际效果越来越接近于平均分配调用量到后端的每一台服务器，也就是轮询的结果。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;源地址哈希法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;源地址哈希的思想是根据获取客户端的IP地址，通过哈希函数计算得到的一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是客服端要访问服务器的序号。采用源地址哈希法进行负载均衡，同一IP地址的客户端，当后端服务器列表不变时，它每次都会映射到同一台后端服务器进行访问。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;加权轮询法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此它们的抗压能力也不相同。给配置高、负载低的机器配置更高的权重，让其处理更多的请；而配置低、负载高的机器，给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;加权随机法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;与加权轮询法一样，加权随机法也根据后端机器的配置，系统的负载分配不同的权重。不同的是，它是按照权重随机请求后端服务器，而非顺序。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;最小连接数法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它是根据后端服务器当前的连接情况，动态地选取其中当前 积压连接数最少的一台服务器来处理当前的请求，尽可能地提高后端服务的利用效率，将负责合理地分流到每一台服务器。&lt;/p&gt;
 </description>
         
         <pubDate>Sun, 21 Aug 2016 13:32:00 +0000</pubDate>
@@ -27,6 +94,108 @@
         
           <description>&lt;p&gt;###创建型模式-单例模式&lt;/p&gt;
 
+&lt;p&gt;为实现类的唯一性，我们需要通过如下三个步骤对该类进行重构：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;为了确保实例的唯一性，我们需要禁止类的外部直接使用new来创建对象，因此需要将类的构造函数的可见性改为private，如下所示：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private Singleton(){}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;虽然类的外部无法使用new来创建对象，但是在Singleton的内部还是可以创建的，可见性只对类外有效。因此，我们可以在Singleton中创建并保存这个唯一实例。为了让外界可以访问这个唯一实例，需要在Singleton中定义一个静态的Singleton类型的私有成员变量，如下所示：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private static Singleton singleton = null;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;为了保证成员变量的封装性，我们将Singleton类型的singleton对象的可见性设置为private，但是外界该如何使用该成员变量并何时实例化该成员变量呢？那就是增加一个公有的静态方法，如下所示&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public static Singleton getInstance(){
+    if(null == singleton){
+        singleton = new Singleton();
+    }
+    return singleton;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;单例模式有三个要点：一是某个类只能有一个实例；二是它必须自行创建这个实例；三是它必须自行向整个系统提供这个实例。&lt;/p&gt;
+
+&lt;p&gt;上述单例模式在多线程下也会出现获取实例不相同的情况，究其原因，当第一次调用getInstance()方法时，，金探测对象为null，因此系统将执行代码instance = new Singleton()，在此过程中，由于要对Singleton进行大量初始化工作，需要一段使劲来创建Singleton对象。而在此时，如果再一次调用getinstance()方法，由于instance尚未创建成功，仍为null，因此instance = new Singelton()将再次执行，导致最终创建了多个instance对象。&lt;/p&gt;
+
+&lt;p&gt;有两种方案可以解决上述问题，饿汉模式和懒汉模式&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;饿汉模式&lt;/strong&gt;直接上代码：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;饿汉模式
+class Singleton{
+    private static final Singleton instance = new Singleton();
+    private Singleton(){}
+    public static Singleton getInstance(){
+        return intance;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;多线程模式下，饿汉模式不会出现创建多个单例对象的情况，可以确保单例对象的唯一性。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;懒汉模式&lt;/strong&gt;直接上代码：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Singleton{
+    private static Singleton instance = null;
+    private Singleton(){}
+    public static Singleton getInstance(){
+        if(null == instance){
+            synchronized(Singleton.class){
+                instance = new Singleton();
+            }
+        }
+        return instance;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;多线程情况下，上述懒汉模式还是会出现单例对象不唯一的情况，加入线程A进入synchronized锁定代码，线程B处于排队等待状态。但是当A执行完毕时，线程B并不知道实例已经创建，线程B继续创建实例，会导致产生多个单例对象。进一步改进，在synchronized中再进行一次判断，这种方式称为双重检查锁定(Double-Check Locking)。代码如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Singleton{
+    private volatile static Singleton instance = null;
+    private Singleton(){}
+    public static Singleton getInstance(){
+        if(null == instance){
+            synchronized(Singleton.class){
+                if(null == instance){
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;需要注意的是，如果使用双重检查锁定来实现懒汉模式，需要在静态成员变量instance之前增加修饰符volatile，被volatile修饰的成员变量可以确保多个线程都能够正确处理。由于volatile关键字会屏蔽Java虚拟机所做的一些代码优化，可能会导致系统运行效率降低。&lt;/p&gt;
+
+&lt;p&gt;可以从资源利用效率和资源初始化耗时两方面比较饿汉模式和懒汉模式的优劣。&lt;/p&gt;
+
+&lt;p&gt;有没有一种方式，可以克服两种模式的缺点呢，是的，有！&lt;/p&gt;
+
+&lt;p&gt;Initialization Demand Holder（IoDH），在IoDH中，我们在单例类中增加一个静态（static）内部类，在该类内部创建单例对象，再将该单例对象通过getInstance()方法返回给外部使用，代码如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Singleton{
+    private Singleton(){}
+    private static class HolderClass{
+        private final static Singleton instance = new Singleton();
+    }
+    public static Singleton getInstance(){
+        return HolderClass.instance;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过使用IoDH，既可以实现延迟加载，又可以保证线程安全，不影响系统性能，不失为一种好的单例模式实现方式，其缺点是与编程语言本身的特性相关，很多面向对象的语言不支持IoDH。&lt;/p&gt;
 </description>
         
         <pubDate>Tue, 21 Jun 2016 11:18:00 +0000</pubDate>
