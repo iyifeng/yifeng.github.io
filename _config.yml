@@ -9,8 +9,6 @@ language: 'zh-Hans'
 # Website info
 name: 'BugCoder'
 description: "没啥说的，就是干"
-
-google_analytics: UA-69281367-1
 disqus: username
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
 baseurl: ""
