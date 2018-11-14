@@ -18,7 +18,8 @@
 	  <pubDate>2015-09-27T18:18:00+08:00</pubDate>
 	  <guid>/spring-propagation</guid>
 	  <description><![CDATA[
-	     <p>Spring事务传播机制，敲一遍代码就记住了<!--more--></p>
+	     <p>Spring事务传播机制，敲一遍代码就记住了
+<!--more--></p>
 <h3 id="场景佩奇要给乔治转账">场景：佩奇要给乔治转账</h3>
 
 <ol>
