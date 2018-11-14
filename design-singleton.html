@@ -141,25 +141,25 @@
   <li>
     <p>为了确保实例的唯一性，我们需要禁止类的外部直接使用new来创建对象，因此需要将类的构造函数的可见性改为private，如下所示：</p>
 
-    <pre><code>private Singleton(){}
-</code></pre>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private Singleton(){}
+</code></pre></div>    </div>
   </li>
   <li>
     <p>虽然类的外部无法使用new来创建对象，但是在Singleton的内部还是可以创建的，可见性只对类外有效。因此，我们可以在Singleton中创建并保存这个唯一实例。为了让外界可以访问这个唯一实例，需要在Singleton中定义一个静态的Singleton类型的私有成员变量，如下所示：</p>
 
-    <pre><code>private static Singleton singleton = null;
-</code></pre>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private static Singleton singleton = null;
+</code></pre></div>    </div>
   </li>
   <li>
     <p>为了保证成员变量的封装性，我们将Singleton类型的singleton对象的可见性设置为private，但是外界该如何使用该成员变量并何时实例化该成员变量呢？那就是增加一个公有的静态方法，如下所示</p>
 
-    <pre><code>public static Singleton getInstance(){
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static Singleton getInstance(){
     if(null == singleton){
         singleton = new Singleton();
     }
     return singleton;
 }
-</code></pre>
+</code></pre></div>    </div>
   </li>
 </ol>
 
@@ -171,7 +171,7 @@
 
 <p><strong>饿汉模式</strong>直接上代码：</p>
 
-<pre><code>饿汉模式
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>饿汉模式
 class Singleton{
     private static final Singleton instance = new Singleton();
     private Singleton(){}
@@ -179,13 +179,13 @@ class Singleton{
         return intance;
     }
 }
-</code></pre>
+</code></pre></div></div>
 
 <p>多线程模式下，饿汉模式不会出现创建多个单例对象的情况，可以确保单例对象的唯一性。</p>
 
 <p><strong>懒汉模式</strong>直接上代码：</p>
 
-<pre><code>class Singleton{
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Singleton{
     private static Singleton instance = null;
     private Singleton(){}
     public static Singleton getInstance(){
@@ -197,11 +197,11 @@ class Singleton{
         return instance;
     }
 }
-</code></pre>
+</code></pre></div></div>
 
 <p>多线程情况下，上述懒汉模式还是会出现单例对象不唯一的情况，加入线程A进入synchronized锁定代码，线程B处于排队等待状态。但是当A执行完毕时，线程B并不知道实例已经创建，线程B继续创建实例，会导致产生多个单例对象。进一步改进，在synchronized中再进行一次判断，这种方式称为双重检查锁定(Double-Check Locking)。代码如下：</p>
 
-<pre><code>class Singleton{
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Singleton{
     private volatile static Singleton instance = null;
     private Singleton(){}
     public static Singleton getInstance(){
@@ -215,7 +215,7 @@ class Singleton{
         return instance;
     }
 }
-</code></pre>
+</code></pre></div></div>
 
 <p>需要注意的是，如果使用双重检查锁定来实现懒汉模式，需要在静态成员变量instance之前增加修饰符volatile，被volatile修饰的成员变量可以确保多个线程都能够正确处理。由于volatile关键字会屏蔽Java虚拟机所做的一些代码优化，可能会导致系统运行效率降低。</p>
 
@@ -225,7 +225,7 @@ class Singleton{
 
 <p>Initialization Demand Holder（IoDH），在IoDH中，我们在单例类中增加一个静态（static）内部类，在该类内部创建单例对象，再将该单例对象通过getInstance()方法返回给外部使用，代码如下：</p>
 
-<pre><code>class Singleton{
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Singleton{
     private Singleton(){}
     private static class HolderClass{
         private final static Singleton instance = new Singleton();
@@ -234,7 +234,7 @@ class Singleton{
         return HolderClass.instance;
     }
 }
-</code></pre>
+</code></pre></div></div>
 
 <p>通过使用IoDH，既可以实现延迟加载，又可以保证线程安全，不影响系统性能，不失为一种好的单例模式实现方式，其缺点是与编程语言本身的特性相关，很多面向对象的语言不支持IoDH。</p>
 
