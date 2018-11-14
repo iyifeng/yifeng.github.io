@@ -127,8 +127,9 @@
         <section class="post-content">
 
             <p>Spring事务传播机制，敲一遍代码就记住了
-<!--more-->
-#</p>
+<!--more--></p>
+<h2 id="spring-传播机制实战">Spring 传播机制实战</h2>
+
 <h3 id="场景佩奇要给乔治转账">场景：佩奇要给乔治转账</h3>
 
 <ol>
@@ -166,17 +167,69 @@
     }
 </code></pre></div></div>
 
-<h2 id="别说话就是干">别说话，就是干</h2>
+<h2 id="传播机制7兄弟">传播机制7兄弟</h2>
+
+<p>1.propagation_required</p>
+
+<p>Spring默认的事务传播机制，如果外层有事务则该事物加入外层事务，一起提交或回滚，如果没有事务则当前开启一个新事物，该机制满足大多数业务场景。</p>
+
+<p>transfer、withdrawal、deposit传播机制都设置为<strong>propagation_required</strong>，任何一个方法抛异常，整个事务都会回滚。</p>
+
+<p>2.propagation_required_new</p>
+
+<p>其含义是当前方法每次新开启一个事务，如果存在外层事务的话，就把外层事务挂起。没有外层事务的话，没有就没有呗</p>
 
 <ol>
   <li>
-    <p>propagation_required</p>
+    <p>propagation_never</p>
 
-    <p>Spring默认的事务传播机制，如果外层有事务则该事物加入外层事务，一起提交或回滚，如果没有事务则当前开启一个新事物，该机制满足大多数业务场景。</p>
+    <p>该传播机制不支持事务，其含义是如果存在外层事务，则抛出异常</p>
 
-    <p>transfer、withdrawal、deposit传播机制都设置为<strong>propagation_required</strong>，任何一个方法抛异常，整个事务都会回滚。</p>
+    <p>transfer设置为required，withdrawal和deposit的任何一个传播机制设置为<strong>propagation_never</strong>，整个事务会抛出异常Existing transaction found for transaction marked with propagation ‘never’</p>
+  </li>
+  <li>
+    <p>propagation_mandatory</p>
+
+    <p>其含义是必须要存在外层事务，如果没有的话就会抛异常Existing transaction found for transaction marked with propagation ‘mandatory’</p>
+  </li>
+  <li>
+    <p>propagation_support</p>
+
+    <p>其含义是如果存在外层事务，则加入该事务，不存在的话就按照普通方法执行</p>
+
+    <p>transfer设置为required，withdrawal和deposit的传播机制都设置为<strong>propagation_support</strong>,withdrawal和deposit的任何一个方法抛异常，整个事务都会回滚。</p>
+
+    <p>transfer不设置任何事务，withdrawal执行成功，deposit因为异常执行失败，那么佩奇扣钱成功了，但是乔治加钱的操作失败了，10000块就这么不翼而飞了</p>
+  </li>
+  <li>
+    <p>propagation_not_support</p>
+
+    <p>其含义是不支持事务，如果存在外层事务的话就挂起，没有的话，没有就没有。</p>
+
+    <p>该传播机制与<strong>普通方法的区别</strong></p>
+    <ul>
+      <li>如果transfer设置为required，withdrawal和deposit的传播机制都设置为<strong>propagation_not_support</strong>,withdrawal执行成功，deposit因为异常执行失败，那么佩奇扣钱成功了，但是乔治加钱的操作失败了，10000块就这么不翼而飞了</li>
+      <li>如果transfer设置为required, withdrawal和deposit只是普通方法，没有配置事务，如果withdrawal执行成功，deposit因为异常执行失败，那么transfer事务会回滚，佩奇的扣钱的操作回回滚，10000块钱还在。</li>
+    </ul>
+  </li>
+  <li>
+    <p>propagation_nested</p>
+
+    <p>其含义是嵌套事务，所谓嵌套，外部事务是父事务，当前方法所属的事务是子事务，子事务如果因为异常回滚，回回滚到savepoint，父事务可以选择回滚或者不会滚。但如果父事务回滚，那么子事务一定会回滚</p>
   </li>
 </ol>
+
+<h2 id="动起手不要抖敲着键盘跟着走">动起手，不要抖，敲着键盘，跟着走</h2>
+
+<ol>
+  <li>Mysql建表transaction_user,然后初始化数据,测试用例里有</li>
+  <li>按照自己的喜好随意配置transfer、withdrawal和deposit的传播机制</li>
+  <li>测试用例测试每个传播机制的用法，随时观察transaction_user中的钱的走向</li>
+</ol>
+
+<h2 id="源码">源码</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/bugcodes/transaction-practice.git
+</code></pre></div></div>
 
 
         </section>
