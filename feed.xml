@@ -10,7 +10,9 @@
       <item>
         <title>负载均衡实现方式</title>
         
-          <description></description>
+          <description>&lt;p&gt;分布式必备技能，负载均衡实现方式&lt;/p&gt;
+
+</description>
         
         <pubDate>Sun, 21 Aug 2016 13:32:00 +0000</pubDate>
         <link>
@@ -23,7 +25,9 @@
       <item>
         <title>设计模式-单例模式</title>
         
-          <description></description>
+          <description>&lt;p&gt;设计模式之单例模式，最简单，最暴力，也最贱&lt;/p&gt;
+
+</description>
         
         <pubDate>Tue, 21 Jun 2016 11:18:00 +0000</pubDate>
         <link>
@@ -36,7 +40,9 @@
       <item>
         <title>Spring 传播机制实战</title>
         
-          <description></description>
+          <description>&lt;p&gt;Spring事务传播机制，敲一遍代码就记住了&lt;/p&gt;
+
+</description>
         
         <pubDate>Sun, 27 Sep 2015 10:18:00 +0000</pubDate>
         <link>
@@ -49,7 +55,9 @@
       <item>
         <title>位运算</title>
         
-          <description></description>
+          <description>&lt;p&gt;这是一个神奇的操作&lt;/p&gt;
+
+</description>
         
         <pubDate>Sun, 27 Sep 2015 10:18:00 +0000</pubDate>
         <link>

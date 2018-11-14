@@ -22,7 +22,7 @@ permalink: /:title
 plugins: [jekyll-paginate]
 
 # Additional settings available on the front-matter
-# Site logo in the index.html (as in demo.ghost.io)
+# Site logo in the indexbak.html (as in demo.ghost.io)
 # Author's page cover in _layouts/author.html
 # The same for page.html and tag.html layouts
 # Post's page cover as a per-post basis _posts/...
@@ -49,7 +49,7 @@ relative_source: ../jasper/
 destination: /Users/zbj/BugCoder/yifeng.github.io
 production_url:  https://jekyller.github.io/jasper/
 source_url:  https://github.com/jekyller/jasper/
-excerpt_separator: ""
+excerpt_separator:  '<!--more-->'
 keep_files:
   - CNAME
   - _config.yml
