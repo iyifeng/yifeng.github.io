@@ -27,27 +27,27 @@
   <li>基础操作：扣钱和加钱</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	/**
+<pre><code>	/**
      * 取款操作
      * @param name 用户
      * @param usd 钱
      */
 	void withdrawal(String name, BigDecimal usd);
-</code></pre></div></div>
+</code></pre>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	/**
+<pre><code>	/**
      * 存款操作
      * @param name 用户
      * @param usd 钱
      */
     void deposit(String name, BigDecimal usd);
-</code></pre></div></div>
+</code></pre>
 
 <ol>
   <li>业务操作：转账，pappe给george转账10000块</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	/**
+<pre><code>	/**
      * 转账服务
      * @param oName 从该用户扣钱
      * @param dName 向该用户加钱
@@ -56,7 +56,7 @@
         balanceService.withdrawal(oName,new BigDecimal(10000));
         balanceService.deposit(dName,new BigDecimal(10000));
     }
-</code></pre></div></div>
+</code></pre>
 
 <h2 id="别说话就是干">别说话，就是干</h2>
 
