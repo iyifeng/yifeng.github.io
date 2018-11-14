@@ -54,6 +54,7 @@ keep_files:
   - CNAME
   - _config.yml
   - .git
+  - google215f74271ca298cc.html
 exclude:
   - README.md
   - Rakefile
