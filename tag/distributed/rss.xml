@@ -13,10 +13,10 @@
    
 	<item>
 	  <title>负载均衡实现方式</title>
-	  <link>/balancing-1</link>
+	  <link>/balancing-1.html</link>
 	  <author></author>
 	  <pubDate>2016-08-21T21:32:00+08:00</pubDate>
-	  <guid>/balancing-1</guid>
+	  <guid>/balancing-1.html</guid>
 	  <description><![CDATA[
 	     <p>分布式必备技能，负载均衡实现方式
 <!--more-->

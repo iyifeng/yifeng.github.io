@@ -13,10 +13,10 @@
    
 	<item>
 	  <title>Spring 传播机制实战</title>
-	  <link>/spring-propagation</link>
+	  <link>/spring-propagation.html</link>
 	  <author></author>
 	  <pubDate>2015-09-27T18:18:00+08:00</pubDate>
-	  <guid>/spring-propagation</guid>
+	  <guid>/spring-propagation.html</guid>
 	  <description><![CDATA[
 	     <p>Spring事务传播机制，敲一遍代码就记住了
 <!--more--></p>

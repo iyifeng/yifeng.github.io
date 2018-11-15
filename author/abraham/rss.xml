@@ -13,10 +13,10 @@
    
 	<item>
 	  <title>负载均衡实现方式</title>
-	  <link>/balancing-1</link>
+	  <link>/balancing-1.html</link>
 	  <author></author>
 	  <pubDate>2016-08-21T21:32:00+08:00</pubDate>
-	  <guid>/balancing-1</guid>
+	  <guid>/balancing-1.html</guid>
 	  <description><![CDATA[
 	     <p>分布式必备技能，负载均衡实现方式
 <!--more-->
@@ -96,10 +96,10 @@
 
 	<item>
 	  <title>设计模式-单例模式</title>
-	  <link>/design-singleton</link>
+	  <link>/design-singleton.html</link>
 	  <author></author>
 	  <pubDate>2016-06-21T19:18:00+08:00</pubDate>
-	  <guid>/design-singleton</guid>
+	  <guid>/design-singleton.html</guid>
 	  <description><![CDATA[
 	     <p>设计模式之单例模式，最简单，最暴力，也最贱
 <!--more-->
@@ -214,10 +214,10 @@ class Singleton{
 
 	<item>
 	  <title>Spring 传播机制实战</title>
-	  <link>/spring-propagation</link>
+	  <link>/spring-propagation.html</link>
 	  <author></author>
 	  <pubDate>2015-09-27T18:18:00+08:00</pubDate>
-	  <guid>/spring-propagation</guid>
+	  <guid>/spring-propagation.html</guid>
 	  <description><![CDATA[
 	     <p>Spring事务传播机制，敲一遍代码就记住了
 <!--more--></p>

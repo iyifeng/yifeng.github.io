@@ -13,10 +13,10 @@
    
 	<item>
 	  <title>设计模式-单例模式</title>
-	  <link>/design-singleton</link>
+	  <link>/design-singleton.html</link>
 	  <author></author>
 	  <pubDate>2016-06-21T19:18:00+08:00</pubDate>
-	  <guid>/design-singleton</guid>
+	  <guid>/design-singleton.html</guid>
 	  <description><![CDATA[
 	     <p>设计模式之单例模式，最简单，最暴力，也最贱
 <!--more-->
