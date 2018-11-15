@@ -1,1 +1,1 @@
-Sitemap: /sitemap.xml
+Sitemap: http://v0ex.com/sitemap.xml

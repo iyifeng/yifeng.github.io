@@ -4,7 +4,22 @@
     <title>等天下雨 - Articles</title>
     <description>不如自己打井，多谈钱，少谈情怀</description>
     <link>
-    </link>
+    http://v0ex.com</link>
+    
+      
+      <item>
+        <title>MySQL锁表解决方法</title>
+        
+          <description>&lt;p&gt;工作中经常会遇到MySQL数据库锁表的情况，可以用以下方式查询并kill相关的线程&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 21 Aug 2016 13:32:00 +0000</pubDate>
+        <link>
+        http://v0ex.com/mysql-table-lock.html</link>
+        <guid isPermaLink="true">http://v0ex.com/mysql-table-lock.html</guid>
+      </item>
+      
     
       
       <item>
@@ -16,8 +31,8 @@
         
         <pubDate>Sun, 21 Aug 2016 13:32:00 +0000</pubDate>
         <link>
-        /balancing-1.html</link>
-        <guid isPermaLink="true">/balancing-1.html</guid>
+        http://v0ex.com/balancing-1.html</link>
+        <guid isPermaLink="true">http://v0ex.com/balancing-1.html</guid>
       </item>
       
     
@@ -31,8 +46,8 @@
         
         <pubDate>Tue, 21 Jun 2016 11:18:00 +0000</pubDate>
         <link>
-        /design-singleton.html</link>
-        <guid isPermaLink="true">/design-singleton.html</guid>
+        http://v0ex.com/design-singleton.html</link>
+        <guid isPermaLink="true">http://v0ex.com/design-singleton.html</guid>
       </item>
       
     
@@ -46,8 +61,8 @@
         
         <pubDate>Sun, 27 Sep 2015 10:18:00 +0000</pubDate>
         <link>
-        /spring-propagation.html</link>
-        <guid isPermaLink="true">/spring-propagation.html</guid>
+        http://v0ex.com/spring-propagation.html</link>
+        <guid isPermaLink="true">http://v0ex.com/spring-propagation.html</guid>
       </item>
       
     
@@ -61,8 +76,8 @@
         
         <pubDate>Sun, 27 Sep 2015 10:18:00 +0000</pubDate>
         <link>
-        /bit-operation.html</link>
-        <guid isPermaLink="true">/bit-operation.html</guid>
+        http://v0ex.com/bit-operation.html</link>
+        <guid isPermaLink="true">http://v0ex.com/bit-operation.html</guid>
       </item>
       
     

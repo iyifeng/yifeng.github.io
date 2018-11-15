@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Page Meta -->
-    <title>负载均衡实现方式</title>
+    <title>MySQL锁表解决方法</title>
     <meta name="description" content="不如自己打井，多谈钱，少谈情怀" />
 
     <!-- Mobile Meta -->
@@ -26,21 +26,21 @@
     <style>.hljs { background: none; }</style>
 
     <!-- Ghost outputs important style and meta data with this tag -->
-        <link rel="canonical" href="http://v0ex.com/balancing-1.html" />
+        <link rel="canonical" href="http://v0ex.com/mysql-table-lock.html" />
     <meta name="referrer" content="origin" />
     <link rel="next" href="page2/" />
 
     <meta property="og:site_name" content="等天下雨" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="负载均衡实现方式" />
+    <meta property="og:title" content="MySQL锁表解决方法" />
     <meta property="og:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta property="og:url" content="http://v0ex.com/balancing-1.html" />
+    <meta property="og:url" content="http://v0ex.com/mysql-table-lock.html" />
     <meta property="og:image" content="assets/images/cover1.jpg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="负载均衡实现方式" />
+    <meta name="twitter:title" content="MySQL锁表解决方法" />
     <meta name="twitter:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta name="twitter:url" content="http://v0ex.com/balancing-1.html" />
+    <meta name="twitter:url" content="http://v0ex.com/mysql-table-lock.html" />
     <meta name="twitter:image:src" content="assets/images/cover1.jpg" />
 
     <script type="application/ld+json">
@@ -48,8 +48,8 @@
     "@context": "http://schema.org",
     "@type": "Website",
     "publisher": "等天下雨",
-    "name": "负载均衡实现方式",
-    "url": "http://v0ex.com/balancing-1.html",
+    "name": "MySQL锁表解决方法",
+    "url": "http://v0ex.com/mysql-table-lock.html",
     "image": "assets/images/cover1.jpg",
     "description": "不如自己打井，多谈钱，少谈情怀"
 }
@@ -104,7 +104,7 @@
     <article class="post tag-fiction">
 
         <header class="post-header">
-            <h1 class="post-title" style="text-align:center">负载均衡实现方式</h1>
+            <h1 class="post-title" style="text-align:center">MySQL锁表解决方法</h1>
             <section class="post-meta">
             <!-- <a href=''></a> -->
 
@@ -117,7 +117,11 @@
                 on
                 
                     
-                       <a href='tag/distributed'>Distributed</a>
+                       <a href='tag/mysql'>Mysql</a>,
+                    
+                
+                    
+                       <a href='tag/锁表'>锁表</a>
                     
                 
                 
@@ -126,78 +130,121 @@
 
         <section class="post-content">
 
-            <p>分布式必备技能，负载均衡实现方式
-<!--more-->
-#</p>
-<h2 id="一负载均衡的基本概念">一、负载均衡的基本概念</h2>
+            <p>工作中经常会遇到MySQL数据库锁表的情况，可以用以下方式查询并kill相关的线程
+<!--more--></p>
 
-<p>负载均衡是指，将请求分发到 多台 应用服务器，以此来分散 压力的一种架构方式，他是以集群的方式存在，并且当 某个节点挂掉的时候，可以自动 不再将请求分配到此节点。</p>
+<h2 id="查看正在锁的事务">查看正在锁的事务</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS;
+</code></pre></div></div>
 
-<h2 id="二-实现方式">二、 实现方式</h2>
+<h2 id="查看等待锁的事务">查看等待锁的事务</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
+</code></pre></div></div>
+<h2 id="查询-正在执行的事务">查询 正在执行的事务：</h2>
 
-<ol>
-  <li>重定向</li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM information_schema.INNODB_TRX;
+</code></pre></div></div>
+<h2 id="查看事务等待状况">查看事务等待状况：</h2>
 
-<p>这种方式，是通过将请求全部发送到前置机，由前置机通过算法 得出要分配给那台 应用服务器，然后响应给客户端，由客户端重定向到应用服务器的一种方式。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
+     r.trx_id waiting_trx_id,
+     r.trx_mysql_thread_id waiting_thread,
+     r.trx_query waiting_query,
+     b.trx_id blocking_trx_id,
+     b.trx_mysql_thread_id blocking_thread,
+     b.trx_query blocking_query
+FROM
+     information_schema.innodb_lock_waits w
+INNER JOIN information_schema.innodb_trx b ON b.trx_id = w.blocking_trx_id
+INNER JOIN information_schema.innodb_trx r ON r.trx_id = w.requesting_trx_id;
+</code></pre></div></div>
 
-<p>这种方式，由于每一个的请求，都要重定向一下，所以效率不是很高</p>
+<h2 id="查看更具体的事务等待状况">查看更具体的事务等待状况：</h2>
 
-<ol>
-  <li>反向代理</li>
-</ol>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
+     b.trx_state,
+     e.state,
+     e.time,
+     d.state AS block_state,
+     d.time AS block_time,
+     a.requesting_trx_id,
+     a.requested_lock_id,
+     b.trx_query,
+     b.trx_mysql_thread_id,
+     a.blocking_trx_id,
+     a.blocking_lock_id,
+     c.trx_query AS block_trx_query,
+     c.trx_mysql_thread_id AS block_trx_mysql_tread_id
+FROM
+     information_schema.INNODB_LOCK_WAITS a
+LEFT JOIN information_schema.INNODB_TRX b ON a.requesting_trx_id = b.trx_id
+LEFT JOIN information_schema.INNODB_TRX c ON a.blocking_trx_id = c.trx_id
+LEFT JOIN information_schema.PROCESSLIST d ON c.trx_mysql_thread_id = d.id
+LEFT JOIN information_schema.PROCESSLIST e ON b.trx_mysql_thread_id = e.id
+ORDER BY
+     a.requesting_trx_id;
+</code></pre></div></div>
+<h2 id="查看未关闭的事务">查看未关闭的事务：</h2>
+<p>–MySQL 5.6</p>
 
-<p>这种方式，是通过在前置机，使用反向代理的方式，将请求分发到应用服务器，客户端无需再请求一次，实现方式通常有两种，一种是用交换机实现，还有一种是用nginx这一类的软件实现</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
+     a.trx_id,
+     a.trx_state,
+     a.trx_started,
+     a.trx_query,
+     b.ID,
+     b.USER,
+     b.DB,
+     b.COMMAND,
+     b.TIME,
+     b.STATE,
+     b.INFO,
+     c.PROCESSLIST_USER,
+     c.PROCESSLIST_HOST,
+     c.PROCESSLIST_DB,
+     d.SQL_TEXT
+FROM
+     information_schema.INNODB_TRX a
+LEFT JOIN information_schema.PROCESSLIST b ON a.trx_mysql_thread_id = b.id
+AND b.COMMAND = 'Sleep'
+LEFT JOIN PERFORMANCE_SCHEMA.threads c ON b.id = c.PROCESSLIST_ID
+LEFT JOIN PERFORMANCE_SCHEMA.events_statements_current d ON d.THREAD_ID = c.THREAD_ID;
+</code></pre></div></div>
+<p>–MySQL 5.5</p>
 
-<p>这种方式，由于不需要再次重定向，所以较第一种，效率较高，但是由于请求和响应都是通过前置机来的，所以对前置机的考验很大</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
+     a.trx_id,
+     a.trx_state,
+     a.trx_started,
+     a.trx_query,
+     b.ID,
+     b. USER,
+     b. HOST,
+     b.DB,
+     b.COMMAND,
+     b.TIME,
+     b.STATE,
+     b.INFO
+FROM
+     information_schema.INNODB_TRX a
+LEFT JOIN information_schema.PROCESSLIST b ON a.trx_mysql_thread_id = b.id
+WHERE
+     b.COMMAND = 'Sleep';
+</code></pre></div></div>
+<h2 id="查看某段时间以来未关闭事务">查看某段时间以来未关闭事务：</h2>
 
-<ol>
-  <li>数据链路返回</li>
-</ol>
-
-<p>这种方式，通过给应用服务器设置虚拟IP，然后通过修改mac地址的方式，将请求分发出去，而应用服务器 收到请求后，可以直接响应给客户端，而不需要经过前置机。</p>
-
-<p>这种方式，由于 前置机 只需要接受请求，不需要响应数据，所以，效率较第二种较高。</p>
-
-<h2 id="三-负载均衡算法">三、 负载均衡算法</h2>
-
-<ol>
-  <li>轮询法</li>
-</ol>
-
-<p>将请求按顺序轮流地分配到后端服务器上，它均衡地对待后端的每一台服务器，而不关心服务器实际的连接数和当前的系统负载。</p>
-
-<ol>
-  <li>随机法</li>
-</ol>
-
-<p>通过系统的随机算法，根据后端服务器的列表大小值来随机选取其中的一台服务器进行访问。由概率统计理论可以得知，随着客户端调用服务端的次数增多，</p>
-
-<p>其实际效果越来越接近于平均分配调用量到后端的每一台服务器，也就是轮询的结果。</p>
-
-<ol>
-  <li>源地址哈希法</li>
-</ol>
-
-<p>源地址哈希的思想是根据获取客户端的IP地址，通过哈希函数计算得到的一个数值，用该数值对服务器列表的大小进行取模运算，得到的结果便是客服端要访问服务器的序号。采用源地址哈希法进行负载均衡，同一IP地址的客户端，当后端服务器列表不变时，它每次都会映射到同一台后端服务器进行访问。</p>
-
-<ol>
-  <li>加权轮询法</li>
-</ol>
-
-<p>不同的后端服务器可能机器的配置和当前系统的负载并不相同，因此它们的抗压能力也不相同。给配置高、负载低的机器配置更高的权重，让其处理更多的请；而配置低、负载高的机器，给其分配较低的权重，降低其系统负载，加权轮询能很好地处理这一问题，并将请求顺序且按照权重分配到后端。</p>
-
-<ol>
-  <li>加权随机法</li>
-</ol>
-
-<p>与加权轮询法一样，加权随机法也根据后端机器的配置，系统的负载分配不同的权重。不同的是，它是按照权重随机请求后端服务器，而非顺序。</p>
-
-<ol>
-  <li>最小连接数法</li>
-</ol>
-
-<p>最小连接数算法比较灵活和智能，由于后端服务器的配置不尽相同，对于请求的处理有快有慢，它是根据后端服务器当前的连接情况，动态地选取其中当前 积压连接数最少的一台服务器来处理当前的请求，尽可能地提高后端服务的利用效率，将负责合理地分流到每一台服务器。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
+        trx_id,
+        trx_started,
+        trx_mysql_thread_id
+FROM
+        INFORMATION_SCHEMA.INNODB_TRX
+WHERE
+        trx_started &lt; date_sub(now(), INTERVAL 1 MINUTE)
+AND trx_operation_state IS NULL
+AND trx_query IS NULL;
+</code></pre></div></div>
 
 
         </section>
@@ -223,19 +270,12 @@
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story no-cover" href="mysql-table-lock.html">
-            <section class="post">
-                <h2>MySQL锁表解决方法</h2>
-                <p></p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
     
-        <a class="read-next-story prev no-cover" href="design-singleton.html">
+        <a class="read-next-story prev no-cover" href="balancing-1.html">
             <section class="post">
-                <h2>设计模式-单例模式</h2>
+                <h2>负载均衡实现方式</h2>
                 <p></p>
             </section>
         </a>
