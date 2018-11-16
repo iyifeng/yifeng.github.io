@@ -12,7 +12,7 @@
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    
 	<item>
-	  <title>MySQL锁表解决方法</title>
+	  <title>排序算法</title>
 	  <link>/arithmetic-1.html</link>
 	  <author></author>
 	  <pubDate>2016-09-11T19:32:00+08:00</pubDate>
