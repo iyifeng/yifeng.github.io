@@ -10,6 +10,21 @@
       <item>
         <title>MySQL锁表解决方法</title>
         
+          <description>&lt;p&gt;面试中经常涉及的算法问题&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 11 Sep 2016 11:32:00 +0000</pubDate>
+        <link>
+        http://v0ex.com/arithmetic-1.html</link>
+        <guid isPermaLink="true">http://v0ex.com/arithmetic-1.html</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>MySQL锁表解决方法</title>
+        
           <description>&lt;p&gt;工作中经常会遇到MySQL数据库锁表的情况，可以用以下方式查询并kill相关的线程&lt;/p&gt;
 
 </description>
