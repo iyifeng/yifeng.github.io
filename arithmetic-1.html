@@ -26,7 +26,7 @@
     <style>.hljs { background: none; }</style>
 
     <!-- Ghost outputs important style and meta data with this tag -->
-        <link rel="canonical" href="http://v0ex.com/arithmetic-1.html" />
+        <link rel="canonical" href="http://www.v0ex.com/arithmetic-1.html" />
     <meta name="referrer" content="origin" />
     <link rel="next" href="page2/" />
 
@@ -34,13 +34,13 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="排序算法" />
     <meta property="og:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta property="og:url" content="http://v0ex.com/arithmetic-1.html" />
+    <meta property="og:url" content="http://www.v0ex.com/arithmetic-1.html" />
     <meta property="og:image" content="assets/images/cover1.jpg" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="排序算法" />
     <meta name="twitter:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta name="twitter:url" content="http://v0ex.com/arithmetic-1.html" />
+    <meta name="twitter:url" content="http://www.v0ex.com/arithmetic-1.html" />
     <meta name="twitter:image:src" content="assets/images/cover1.jpg" />
 
     <script type="application/ld+json">
@@ -49,7 +49,7 @@
     "@type": "Website",
     "publisher": "等天下雨",
     "name": "排序算法",
-    "url": "http://v0ex.com/arithmetic-1.html",
+    "url": "http://www.v0ex.com/arithmetic-1.html",
     "image": "assets/images/cover1.jpg",
     "description": "不如自己打井，多谈钱，少谈情怀"
 }
@@ -132,6 +132,33 @@
 
             <p>面试中经常涉及的算法问题
 <!--more--></p>
+
+<h2 id="三向切分的快速排序">三向切分的快速排序</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//三向切分的快速排序
+public class Quick3Way{
+    private static void sort(Comparable[] a,int lo, int hi){
+        //调用此方法的公有方法sort()
+        if (hi &lt;= lo) {
+            return;
+        }
+        int lt = lo,i = lo+1,gt = hi;
+        Comparable v = a[lo];
+        while(i &lt;= gt){
+            int cmp = a[i].compareTo(V);
+            if (cmp &lt; 0) {
+                exch(a,lt++,i++);
+            }else if (cmp &gt; 0) {
+                exch(a,i,gt--);
+            }else{i++;}
+        }
+        //现在a[lo..lt-1]&lt;v=a[lt..gt]&lt;a[gt+1..hi]成立
+        sort(a,lo,lt-1);
+        sort(a,gt+1,hi);
+    }
+}
+
+</code></pre></div></div>
 
 <h2 id="快速排序">快速排序</h2>
 

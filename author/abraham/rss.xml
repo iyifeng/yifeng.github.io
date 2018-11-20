@@ -5,7 +5,7 @@
    
       <title></title>
    
-   <link>http://v0ex.com</link>
+   <link>http://www.v0ex.com</link>
    <description>不如自己打井，多谈钱，少谈情怀</description>
    <language>zh-Hans</language>
    <managingEditor> </managingEditor>
@@ -20,6 +20,33 @@
 	  <description><![CDATA[
 	     <p>面试中经常涉及的算法问题
 <!--more--></p>
+
+<h2 id="三向切分的快速排序">三向切分的快速排序</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//三向切分的快速排序
+public class Quick3Way{
+    private static void sort(Comparable[] a,int lo, int hi){
+        //调用此方法的公有方法sort()
+        if (hi &lt;= lo) {
+            return;
+        }
+        int lt = lo,i = lo+1,gt = hi;
+        Comparable v = a[lo];
+        while(i &lt;= gt){
+            int cmp = a[i].compareTo(V);
+            if (cmp &lt; 0) {
+                exch(a,lt++,i++);
+            }else if (cmp &gt; 0) {
+                exch(a,i,gt--);
+            }else{i++;}
+        }
+        //现在a[lo..lt-1]&lt;v=a[lt..gt]&lt;a[gt+1..hi]成立
+        sort(a,lo,lt-1);
+        sort(a,gt+1,hi);
+    }
+}
+
+</code></pre></div></div>
 
 <h2 id="快速排序">快速排序</h2>
 
