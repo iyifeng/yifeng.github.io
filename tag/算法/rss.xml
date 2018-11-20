@@ -209,6 +209,14 @@ public class Insertion{
 }
 </code></pre></div></div>
 
+<h3 id="排序算法">排序算法</h3>
+
+<p>排序算法可以分为两类：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>除了函数调用所需的栈和固定数目的实例变量之外无需额外内存的原地排序算法
+以及需要额外内存空间来存储另一份数组副本的其他排序算法
+</code></pre></div></div>
+
 <h2 id="排序类的模板">排序类的模板</h2>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//排序算法类的模板
