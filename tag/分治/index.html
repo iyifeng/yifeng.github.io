@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Page Meta -->
-    <title>二分查找算法</title>
+    <title>等天下雨</title>
     <meta name="description" content="不如自己打井，多谈钱，少谈情怀" />
 
     <!-- Mobile Meta -->
@@ -26,31 +26,31 @@
     <style>.hljs { background: none; }</style>
 
     <!-- Ghost outputs important style and meta data with this tag -->
-        <link rel="canonical" href="http://www.v0ex.com/arithmetic-2.html" />
+        <link rel="canonical" href="http://www.v0ex.com/tag/%E5%88%86%E6%B2%BB/" />
     <meta name="referrer" content="origin" />
     <link rel="next" href="page2/" />
 
     <meta property="og:site_name" content="等天下雨" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="二分查找算法" />
+    <meta property="og:title" content="等天下雨" />
     <meta property="og:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta property="og:url" content="http://www.v0ex.com/arithmetic-2.html" />
-    <meta property="og:image" content="assets/images/cover1.jpg" />
+    <meta property="og:url" content="http://www.v0ex.com/tag/%E5%88%86%E6%B2%BB/" />
+    <meta property="og:image" content="assets/images/cover2.jpg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="二分查找算法" />
+    <meta name="twitter:title" content="等天下雨" />
     <meta name="twitter:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta name="twitter:url" content="http://www.v0ex.com/arithmetic-2.html" />
-    <meta name="twitter:image:src" content="assets/images/cover1.jpg" />
+    <meta name="twitter:url" content="http://www.v0ex.com/tag/%E5%88%86%E6%B2%BB/" />
+    <meta name="twitter:image:src" content="assets/images/cover2.jpg" />
 
     <script type="application/ld+json">
 {
     "@context": "http://schema.org",
     "@type": "Website",
     "publisher": "等天下雨",
-    "name": "二分查找算法",
-    "url": "http://www.v0ex.com/arithmetic-2.html",
-    "image": "assets/images/cover1.jpg",
+    "name": "等天下雨",
+    "url": "http://www.v0ex.com/tag/%E5%88%86%E6%B2%BB/",
+    "image": "assets/images/cover2.jpg",
     "description": "不如自己打井，多谈钱，少谈情怀"
 }
     </script>
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="tag-template nav-closed">
 
     <!-- The blog navigation links -->
     <div class="nav">
@@ -84,36 +84,65 @@
     <div class="site-wrapper">
 
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
-        <!-- default -->
+        <!-- dynamically overriding backgrounds for tags as well as descriptions -->
 
-<!-- The comment above "< default" means - insert everything in this file into -->
-    <!-- the [body] of the default.hbs template, which contains our header/footer. -->
 
-<!-- Everything inside the #post tags pulls data from the post -->
-<!-- #post -->
+<!-- default -->
+<!-- The tag above means - insert everything in this file into the [body] of the default.hbs template -->
 
-<header class="main-header post-head no-cover">
-    <nav class="main-nav  clearfix">
+<!-- If we have a tag cover, display that - else blog cover - else nothing -->
+<header class="main-header tag-head " style="background-image: url(assets/images/cover2.jpg) ">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href=""><img src="assets/images/ghost.png" alt="Blog Logo" /></a>
         
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
         
     </nav>
+    <div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title">分治</h1>
+            <h2 class="page-description">
+            
+			    A 1-post collection
+            
+            </h2>
+        </div>
+    </div>
 </header>
 
-<main class="content" role="main">
+<!-- The main content area on the homepage -->
+<main id="content" class="content" role="main">
 
-    <article class="post tag-fiction">
+    <!-- The tag below includes the post loop - partials/loop.hbs -->
+        <!-- Previous/next page links - only displayed on page 2+ -->
+    <div class="extra-pagination inner">
+        
+            <nav class="pagination" role="pagination">
+    
+    <span class="page-number"> Page 1 of 1 </span>
+     
+</nav>
+        
+    </div>
 
+    <!-- This is the post loop - each post will be output using this markup -->
+    
+    <article class="post">
         <header class="post-header">
-            <h1 class="post-title" style="text-align:center">二分查找算法</h1>
-            <section class="post-meta">
-            <!-- <a href=''></a> -->
+            <h2 class="post-title"><a href="arithmetic-3.html">分治策略模板</a></h2>
+        </header>
+        <section class="post-excerpt">
+            <p>面试中经常涉及的算法问题
 
+ <a class="read-more" href="arithmetic-3.html">&raquo;</a></p>
+        </section>
+        <footer class="post-meta">
             
                 
             
-            <time class="post-date" datetime="2016-09-15">15 Sep 2016</time>
-                <!-- [[tags prefix=" on "]] -->
-                
+
+            <!-- [[tags prefix=" on "]] -->
+            
                 on
                 
                     
@@ -121,108 +150,26 @@
                     
                 
                     
-                       <a href='tag/二分'>二分</a>
+                       <a href='tag/分治'>分治</a>
                     
                 
-                
-            </section>
-        </header>
-
-        <section class="post-content">
-
-            <p>面试中经常涉及的算法问题
-<!--more--></p>
-
-<h2 id="非递归二分查找">非递归二分查找</h2>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```
-//非递归二分查找
-public static int binSearch(int[] array, int key){
-    int mid = 0;
-    int start = 0;
-    int end = array.length - 1;
-    while(start &lt;= end){
-        mid = (start + end)/2;
-        if (array[mid] == key) {
-            return mid;
-        }else if (array[mid] &gt; key) {
-            end = mid - 1;
-        }else{
-            start = mid + 1;
-        }
-    }
-    return -1;
-}
-
-```
-</code></pre></div></div>
-
-<h2 id="递归二分查找">递归二分查找</h2>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```
-public static int binSearch(int[] array,int start,int end,int key){
-    int mid = (start + end)/2;
-    if (array[mid] == key) {
-        return mid;
-    }
-    if (start &gt;= end) {
-        return -1;
-    }else if (key &gt; array[mid]) {
-        return binSearch(array,mid+1,end,key);
-    }else{
-        return binSearch(array,start,mid-1,key);
-    }
-    return -1;
-}
-```
-</code></pre></div></div>
-
-
-
-        </section>
-
-        <footer class="post-footer">
-
-            <!-- Everything inside the #author tags pulls data from the author -->
-            <!-- #author-->
             
-                
-            
-
-            <!-- Add Disqus Comments -->
-            
-
+            <time class="post-date" datetime="2016-09-17">18 Sep 2016</time>
         </footer>
-
     </article>
+    
+
+    <!-- Previous/next page links - displayed on every page -->
+    
+        <nav class="pagination" role="pagination">
+    
+    <span class="page-number"> Page 1 of 1 </span>
+     
+</nav>
+    
+
 
 </main>
-
-<aside class="read-next">
-
-    <!-- [[! next_post ]] -->
-    
-        <a class="read-next-story no-cover" href="arithmetic-3.html">
-            <section class="post">
-                <h2>分治策略模板</h2>
-                <p></p>
-            </section>
-        </a>
-    
-    <!-- [[! /next_post ]] -->
-    <!-- [[! prev_post ]] -->
-    
-        <a class="read-next-story prev no-cover" href="arithmetic-1.html">
-            <section class="post">
-                <h2>排序算法</h2>
-                <p></p>
-            </section>
-        </a>
-    
-    <!-- [[! /prev_post ]] -->
-</aside>
-
-<!-- /post -->
 
 
         <!-- The tiny footer at the very bottom -->
