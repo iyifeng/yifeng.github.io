@@ -21,8 +21,9 @@
 	     <p>java帮你入门-编译时与运行时
 <!--more--></p>
 
-<p>转载：https://zhuanlan.zhihu.com/p/22886648 
-参考：http://java-success.blogspot.com/2011/09/core-java-interview-answers-q1.html</p>
+<p>转载：https://zhuanlan.zhihu.com/p/22886648</p>
+
+<p>参考：http://java-success.blogspot.com/2011/09/core-java-interview-answers-q1.html</p>
 
 <p>在开发和设计的时候，我们需要考虑编译时，运行时以及构建时这三个概念。理解这几个概念可以更好地帮助你去了解一些基本的原理。下面是初学者晋级中级水平需要知道的一些问题。</p>
 
