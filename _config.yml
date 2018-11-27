@@ -58,6 +58,7 @@ keep_files:
   - _config.yml
   - .git
   - google215f74271ca298cc.html
+  - baidu_verify_RvPqy8vzJw.html
 exclude:
   - README.md
   - Rakefile
