@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>java自定义同步工具</title>
+        
+          <description>&lt;p&gt;java并发学习笔记&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 20 Nov 2016 21:35:33 +0000</pubDate>
+        <link>
+        http://www.v0ex.com/java-synchronizer-AQS.html</link>
+        <guid isPermaLink="true">http://www.v0ex.com/java-synchronizer-AQS.html</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>java编译时与运行时问与答</title>
         
           <description>&lt;p&gt;java帮你入门-编译时与运行时&lt;/p&gt;
