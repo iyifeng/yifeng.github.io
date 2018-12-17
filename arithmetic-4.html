@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Page Meta -->
-    <title>分治策略模板</title>
+    <title>红黑树</title>
     <meta name="description" content="不如自己打井，多谈钱，少谈情怀" />
 
     <!-- Mobile Meta -->
@@ -26,21 +26,21 @@
     <style>.hljs { background: none; }</style>
 
     <!-- Ghost outputs important style and meta data with this tag -->
-        <link rel="canonical" href="http://www.v0ex.com/arithmetic-3.html" />
+        <link rel="canonical" href="http://www.v0ex.com/arithmetic-4.html" />
     <meta name="referrer" content="origin" />
     <link rel="next" href="page2/" />
 
     <meta property="og:site_name" content="等天下雨" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="分治策略模板" />
+    <meta property="og:title" content="红黑树" />
     <meta property="og:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta property="og:url" content="http://www.v0ex.com/arithmetic-3.html" />
+    <meta property="og:url" content="http://www.v0ex.com/arithmetic-4.html" />
     <meta property="og:image" content="assets/images/cover1.jpg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="分治策略模板" />
+    <meta name="twitter:title" content="红黑树" />
     <meta name="twitter:description" content="不如自己打井，多谈钱，少谈情怀" />
-    <meta name="twitter:url" content="http://www.v0ex.com/arithmetic-3.html" />
+    <meta name="twitter:url" content="http://www.v0ex.com/arithmetic-4.html" />
     <meta name="twitter:image:src" content="assets/images/cover1.jpg" />
 
     <script type="application/ld+json">
@@ -48,8 +48,8 @@
     "@context": "http://schema.org",
     "@type": "Website",
     "publisher": "等天下雨",
-    "name": "分治策略模板",
-    "url": "http://www.v0ex.com/arithmetic-3.html",
+    "name": "红黑树",
+    "url": "http://www.v0ex.com/arithmetic-4.html",
     "image": "assets/images/cover1.jpg",
     "description": "不如自己打井，多谈钱，少谈情怀"
 }
@@ -104,24 +104,24 @@
     <article class="post tag-fiction">
 
         <header class="post-header">
-            <h1 class="post-title" style="text-align:center">分治策略模板</h1>
+            <h1 class="post-title" style="text-align:center">红黑树</h1>
             <section class="post-meta">
             <!-- <a href=''></a> -->
 
             
                 
             
-            <time class="post-date" datetime="2016-09-17">18 Sep 2016</time>
+            <time class="post-date" datetime="2016-09-18">19 Sep 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                 
                 on
                 
                     
-                       <a href='tag/递归'>递归</a>,
+                       <a href='tag/红黑树'>红黑树</a>,
                     
                 
                     
-                       <a href='tag/分治'>分治</a>
+                       <a href='tag/2-3查找树'>2-3查找树</a>
                     
                 
                 
@@ -130,48 +130,106 @@
 
         <section class="post-content">
 
-            <p>面试中经常涉及的算法问题
+            <p>java常用数据结构:红黑树(2-3查找树)
 <!--more--></p>
 
-<h2 id="分治是手段递归是手段的实现方式">分治是手段，递归是手段的实现方式</h2>
+<h2 id="红黑树">红黑树</h2>
 
-<h2 id="递归模板">递归模板</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```
+public void put(Key key,Value val){
+    //查找key,找到则更新其值，否则为它新建一个节点
+    root = put(root,key,val);
+    root.color = BLACK;
+}
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def recursion(level,param1,param2...):
-	# recursion terminator
-	if level &gt; MAX_LEVEL:
-		print_result
-		return
-	
-	# process logic in current level
-	process_data(level,data...)
-	
-	# drill down
-	self.recursion(level+1,p1,p2...)
-	
-	# reverse the current level status if needed
-	reverse_state(level)
-</code></pre></div></div>
+private Node put(Node h,Key key,Value val){
+    if(h == null){
+        //标准的插入操作，和父节点用红连接相连
+        return new Node(key,val,1,RED);
+    }
+    int cmp = key.compareTo(h.key);
+    if(cmp&lt;0){
+        h.left = put(h.left,key,val);
+    }else if(cmp&gt;0){
+        h.right = put(h.right,key,val);
+    }else{
+        h.val = val;
+    }
+    if(isRed(h.right)&amp;&amp;!isRed(h.left)){
+        h = rotateLeft(h);
+    }
+    if(isRed(h.left)&amp;&amp;isRed(h.left.left)){
+        h = rotateRight(h);
+    }
+    if(isRed(h.left)&amp;&amp;isRed(h.right)){
+        flipColors(h);
+    }
+    h.N = size(h.left)+size(h.right)+1;
+    return h;
+}
 
-<h2 id="分治模板">分治模板</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def divide_conquer(problem,param1,param2...):
-	# recursion terminator
-	if problem is None:
-		print_result
-		return
-		
-	# prepare data
-	data = prepare_data(problem)
-	subproblems = split_problem(problem,data)
-	
-	# conquer subproblems
-	subresult1 = self.divide_conquer(subproblems[0],p1...)
-	subresult2 = self.divide_conquer(subproblems[1],p1...)
-	subresult3 = self.divide_conquer(subproblems[2],p1...)
-	
-	# process and generate the final result
-	result = process_result(subresult1,subresult2,subresult3...)
+//颜色转换
+void flipColors(Node h){
+    h.color = RED;
+    h.left.color = BLACK;
+    h.right.color = BLACK;
+}
+
+private static final boolean RED = true;
+private static final boolean BLACK = false;
+
+private class Node{
+    //键
+    Key key;
+    //相关联的值
+    Value val;
+    //左右子树
+    Node left ,right;
+    //这棵子树中的结点总数
+    int N;
+    //由其父节点指向它的链接的颜色
+    boolean color;
+
+    Node(Key key,Value val,int N,boolean color){
+        this.key = key;
+        this.val = val;
+        this.N = N;
+        this.color = color;
+    }
+}
+
+private boolean isRed(Node x){
+    if(x==null){
+        return false;
+    }
+    return x.color == RED;
+}
+
+//左旋转，把红色右链接转为红色左链接
+Node rotateLeft(Node h){
+    Node x = h.right;
+    h.right = x.left;
+    x.left = h;
+    x.color = RED;
+    x.N = h.N;
+    h.N = 1+size(h.left) + size(h.right);
+    return x;
+}
+
+//右旋转，把红色左链接转为红色右链接
+Node rotateRight(Node h){
+    Node x = h.left;
+    h.left = x.right;
+    x.right = h;
+    x.color = RED;
+    x.N = h.N;
+    h.N = 1+size(h.left)+size(h.right);
+    return x;
+}
+
+
+```
 </code></pre></div></div>
 
 
@@ -199,9 +257,9 @@
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story no-cover" href="arithmetic-4.html">
+        <a class="read-next-story no-cover" href="java-interview-answer-1.html">
             <section class="post">
-                <h2>红黑树</h2>
+                <h2>java编译时与运行时问与答</h2>
                 <p></p>
             </section>
         </a>
@@ -209,9 +267,9 @@
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
     
-        <a class="read-next-story prev no-cover" href="arithmetic-2.html">
+        <a class="read-next-story prev no-cover" href="arithmetic-3.html">
             <section class="post">
-                <h2>二分查找算法</h2>
+                <h2>分治策略模板</h2>
                 <p></p>
             </section>
         </a>
