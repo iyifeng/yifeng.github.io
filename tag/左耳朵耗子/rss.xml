@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+   
+      <title></title>
+   
+   <link>http://www.v0ex.com</link>
+   <description>不如自己打井，多谈钱，少谈情怀</description>
+   <language>zh-Hans</language>
+   <managingEditor> </managingEditor>
+   <atom:link href="rss" rel="self" type="application/rss+xml" />
+   
+	<item>
+	  <title>ARTS-第三周</title>
+	  <link>/A-R-T-S-3.html</link>
+	  <author></author>
+	  <pubDate>2019-04-02T05:35:33+08:00</pubDate>
+	  <guid>/A-R-T-S-3.html</guid>
+	  <description><![CDATA[
+	     <p>ARTS-第三周
+<!--more--></p>
+<h2 id="algorithm">Algorithm</h2>
+
+<blockquote>
+  <p><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">3题：在一个字符串s中，找出不包含重复字符的子串的最大长度</a></p>
+</blockquote>
+
+<p><strong>解题思路1-暴力求解</strong></p>
+
+<p>找出该字符串所有的子串，然后检查每个子串是否包含重复字符，在所有不含重复字符的子串中找出最大值。</p>
+
+<ol>
+  <li>用两层嵌套循环找出所有的子串。</li>
+  <li>对每一个子串，判断是否包含重复字符，这里用到了Set集合来处理</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public int lengthOfLongestSubstring(String s){
+    int n = s.length();
+    int max = 0;
+    for(int i = 0;i &lt; n;i++){
+        for(int j = i+1;j &lt;= n;j++){
+            if(allUnique(s,i,j)){
+                max = Math.max(ans, j - i);
+            }
+        }
+    }
+    return max;
+}
+
+/**
+* 判断子串不包含重复字符
+*/
+public boolean allUnique(String s, int start, int end){
+    Set&lt;Character&gt; set = new HashSet&lt;&gt;();
+    for(int i = start;i &lt; end; i++){
+        Character ch = s.charAt(i);
+        if(set.contains(ch)){
+            return false;
+        }else{
+            set.add(ch);
+        }
+    }
+    return true;
+}
+</code></pre></div></div>
+
+<p><strong>Note:</strong>时间复杂度<strong>O(n3)</strong>,空间复杂度<strong>O(min(n,m))</strong>，m是set集合的长度</p>
+
+<hr />
+
+<p><strong>解题思路2-滑动窗口</strong></p>
+
+<p>在思路1中，我们总会重复检查某个子串是否包含重复字符，其实这都是不必要的检查。如果我们对一个子串Sij，从索引i到j-1已经做了检查而且不存在重复字符，那么我们只需要在判断s[j]这个字符是否已经存在于子串Sij中，如果不存在，那说明Sij是一个不含重复字符的子串。这样可以把时间复杂度从O(n3)降低到O(n2)。</p>
+
+<p>我们还可以继续优化，使用HashSet当做一个滑动窗口，HashSet检查一个字符串是否存在，只需要O(1)的时间复杂度。</p>
+
+<p><strong>滑动窗口是数组、字符串问题中常用的抽象概念</strong></p>
+
+<p>滑动窗口是将两个边界滑动到某个方向的窗口。例如把[i,j)向右滑动1个单元，窗口就变成了[i+1,j+1)。</p>
+
+<p>回到我们的题目，我们用一个HashSet存储当前窗口[i,j)中的字符集合(初始窗口i=j)，然后我们滑动j边界到更远，在滑动到S[j]表示的字符在HashSet中存在为止，此时j-i就等于当前不包含重复字符子串的长度。</p>
+
+<p>按照上述的方法，滑动左边界i，一直到最后，就能得到答案。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public int lengthOfLongestSubstring(String s){
+    int n = s.length();
+    Set&lt;Character&gt; set = new HashSet&lt;&gt;();
+    int max = 0, i=0,j=0;
+    while(i&lt;n&amp;&amp;j&lt;n){
+        if(!set.contains(s.charAt(j))){
+            set.add(s.charAt(j++));
+            max = Math.max(max,j-i);
+        }else{
+            set.remove(s.charAt(i++));
+        }
+    }
+    return max;
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p><a href="https://leetcode.com/problems/number-of-1-bits/">191题：求整数二进制中1的个数</a></p>
+</blockquote>
+
+<p><strong>解题思路1</strong></p>
+
+<p>解决方法很直接，一个整数的二进制表示是32位，检查每一位，统计1的个数。从整数的最低有效位开始，向高位逐个检查是否为1。使用一个掩码m=1，任何数字和该掩码之间的位与(AND)操作都能够判断最低有效位是不是1。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00000000000000000000000000000001 掩码
+00000010010000100000000011000000 某个整数
+AND
+----------------------------------------------------
+00000000000000000000000000000000
+结果为0说明最后一位不是1
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00000000000000000000000000000010 掩码左移一位
+00000010010000100000000011000000 某个整数
+AND
+----------------------------------------------------
+00000000000000000000000000000000
+结果为0说明倒数第二位不是1
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00000000000000000000000001000000 掩码左移6位
+00000010010000100000000011000000 某个整数
+AND
+----------------------------------------------------
+00000000000000000000000001000000
+结果不为0说明倒数第七位是1
+</code></pre></div></div>
+
+<p><strong>代码</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public int hammingWeight(int n){
+    int bits = 0;
+    int mask = 1;
+    for(int i=0;i&lt;32;i++){
+        if((n&amp;mask)!=0){
+            bits++;
+        }
+        mask &lt;&lt; 1;
+    }
+    return bits;
+}
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public int lengthOfLongestSubstring(String s){
+    int n = s.length();
+    Set&lt;Character&gt; set = new HashSet&lt;&gt;();
+    int ans = 0,i = 0,j=0;
+    while(i&lt;n&amp;&amp;j&lt;n){
+        if(!set.contains(s.charAt(j))){
+            set.add(s.charAt(j++));
+            ans = Math.max(ans,j-i);
+        }else{
+            set.remove(s.charAt(i++));
+        }
+    }
+    return ans;
+}
+</code></pre></div></div>
+
+<h2 id="review">Review</h2>
+
+<blockquote>
+  <p><a href="https://medium.com/@kevalpatel2106/why-should-you-learn-go-f607681fad65">你为什么要学习go语言</a></p>
+</blockquote>
+
+<p>Go将会成为未来的服务器语言。</p>
+
+<p>这篇文章并不是要教你如何用Go语言来写“hello world”，而是讲述了现阶段的计算机软硬件情况以及为什么需要一种像Go这样的新语言。大概从<strong>硬件的限制</strong>、<strong>Go拥有goroutines</strong>(与Java语言相比，在64位的环境中，JVM会为每个线程分配1M的栈，默认的栈空间大小能够支持1000个线程，上百万上线程需要TB级别的RAM，而Go的栈是动态分配大小的，随着存储数据的数量而增长或抽缩，每创建一个Goroutine需要有大约4KB的栈，1GB的RAM就能支持250万个Goroutine)、<strong>Go直接运行在底层硬件上</strong>（相对于C/C++）它少了一层VM、用Go编写的代码易于维护，最后把Google也搬出来了，说是Go是由Google设计并支持的。</p>
+
+<h2 id="tip">Tip</h2>
+
+<p>Oracle+Mybaits比较问题：<strong>不等于(!=)</strong></p>
+
+<p>工作中遇到一个问题，类似于求用户类型不等于VIP(常量值1)的用户信息。</p>
+
+<p><strong>需求：</strong>数据库中该字段user_type的类型为varchar2，该字段值包含Null、1、0，要找出不为1的信息</p>
+
+<p>SQL语句对应如下</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select user_name from user where user_type != '1'
+</code></pre></div></div>
+
+<p>数据库选择MySQL，上述语句对应Mysql Example如下,能够查询中用户类型不等于VIP的用户信息。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UserCriteria sql = new UserCriteria();
+sql.or().andUserTypeNotEqualTo(UserType.VIP);
+return mapper.selectByExample(sql);
+</code></pre></div></div>
+
+<p><strong>遇到问题：</strong>但是选择Oracle数据库，上述业务逻辑就会有问题，如果某条记录中user_type的字段值为null的话，查询不到该条记录。想要过滤中为null的信息，需要用到<strong>is null</strong></p>
+
+<p><strong>解决方案：</strong> 找出不为1的信息，那么需要找出值为Null和值为0的并集。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UserCriteria sql = new UserCriteria();
+sql.createCriteria().andUserTypeIsNull();    sql.or(sql.createCriteria().andUserTypeEqualTo(UserType.SVIP));
+return mapper.selectByExample(sql);
+</code></pre></div></div>
+
+<h2 id="share">Share</h2>
+
+<p>Lucene学习笔记-<strong>TF-IDF检索模型</strong></p>
+
+<p>tf-idf是<strong>term frequency-inverse document frequency</strong>的缩写，tf表示词项频率，df表示文档频率。</p>
+
+<p><strong>tf-idf</strong>成为<strong>词频-逆文档频率</strong>，用于计算词项对于一个文档集或者语料库中一份文件的重要程度，也就是词项的权重。词项的重要性随着它再文档中出现的次数成正比增加，但同时会随着它在文档中集中出现的频率成反比。如果一个词在一篇文档中出现的频率非常高，说明其重要性比较高，但是如果这个词项在文档集中的其他文档中出现的频率也很高，那说明这个词项有可能是比较常见的。</p>
+
+<h4 id="tf计算方法">TF计算方法</h4>
+
+<ol>
+  <li>
+    <p>文档有长短之分，一篇长文章中某个词语出现3次，很难断定该文章与该词语有关，但是在一篇140字的短文章中出现3次，那该词语与该文章内容就会有很大的关系，以下计算方法可以削弱文档长度的影响</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>词频 tf= （单词在文档中出现的次数）/（文档的总次数）
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Lucene采用的词频标准化方法</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>词频tf = \sqrt 单词在文档中出现的次数
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="df计算方法">DF计算方法</h4>
+
+<p>df通常比较大，把它映射到一个较小的范围，用<strong>idf</strong>来表示，分母中+1是为了防止为0的情况</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>逆文档频率idf = log(文档集总的文档数/(包含某个单词的文档数+1))
+</code></pre></div></div>
+
+<p>词项的权重<strong>tf-idf</strong>的计算公式如下</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tf-idf = 词频tf * 逆文档频率idf
+</code></pre></div></div>
+
+<p>通过tf-idf可以把文档表示成n维的词项权重向量</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>document vector = (W_1,W_2...Wn)
+</code></pre></div></div>
+
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>ARTS-第二周</title>
+	  <link>/A-R-T-S-2.html</link>
+	  <author></author>
+	  <pubDate>2019-03-26T05:35:33+08:00</pubDate>
+	  <guid>/A-R-T-S-2.html</guid>
+	  <description><![CDATA[
+	     <p>ARTS-第二周
+<!--more--></p>
+<h2 id="algorithm">Algorithm</h2>
+
+<blockquote>
+  <p><a href="https://leetcode.com/problems/subsets/">78题</a></p>
+</blockquote>
+
+<p>给定一组不同的整数，返回所有可能的子集。</p>
+
+<p><strong>注意</strong>：解决方案中不能包含重复的子集。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入：nums = [1,2,3]
+输出：
+[
+  [3],
+  [1],
+  [2],
+  [1,2,3],
+  [1,3],
+  [2,3],
+  [1,2],
+  []
+]
+</code></pre></div></div>
+
+<p><strong>解题思路1</strong> 非递归，非位运算，非深度优先</p>
+
+<p>当遍历所有数字时，对于每一个新的数字，我们可以选择它，或者不选择它。</p>
+
+<ol>
+  <li>如果选择它，就把它加入到已生成的所有的子集中。</li>
+  <li>如果不选它，只需要保留现有的子集。</li>
+</ol>
+
+<p>对于上述示例，{1,2,3}最初我们可以生成一个空的集合，[[]]</p>
+
+<ul>
+  <li>
+    <p>对于数字1，如果不选1，结果集还是[]，如果选1，就把1添加到[]中，此时就获得新的子集[1]，合并两个子集，然后我们就获得了结果集[[],[1]]。</p>
+  </li>
+  <li>对于数字2，如果不选择2，结果集还是[[],[1]]。如果选择2，把2添加到现有的所有子集中，然后我们获得了新的子集[2],[1,2]，合并所有子集，我们就获得了结果集[[],[1],[2],[1,2]]</li>
+  <li>同理对于数字3，选择以后，我们就获得了新的子集[3],[1,3],[2,3],[1,2,3]，合并所有子集，我们就获得了这组整数的所有子集集合[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums){
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    result.add(new ArrayList&lt;&gt;());
+    for(int n : nums){
+        int size = result.size();
+        for(int i=0;i&lt;size;i++){
+            List&lt;Integer&gt; subset = new ArrayList&lt;&gt;(result.get(i));
+            subset.add(n);
+            result.add(subset);
+        }
+    }
+    return result;
+}
+</code></pre></div></div>
+
+<p><strong>解题思路2</strong> 递归</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums){
+    List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    Arrays.sort(nums);
+    backtrack(result,new ArrayList&lt;&gt;(),nums,0);
+    return result;
+}
+
+private void backtrack(List&lt;List&lt;Integer&gt;&gt; list,List&lt;Integer&gt; tempList,int[] nums,int start){
+    list.add(new ArrayList&lt;&gt;(tempList));
+    for(int i = start;i &lt; nums.length; i++){
+        temp.add(nums[i]);
+        backtrack(list,tempList,nums,i+1);
+        tempList.remove(tempList.size()-1);
+    }
+}
+</code></pre></div></div>
+
+<h2 id="review">Review</h2>
+
+<blockquote>
+  <p><a href="https://medium.com/cheddar/q-a-instagrams-new-head-of-product-vishal-shah-8ebba9241591">对Instagram的新产品负责人的专访</a></p>
+</blockquote>
+
+<p>该访谈主要围绕Instagram进军电子商务的计划，谈论了Instagram两位联合创始人的原因，还有一个比较有争议的计划，那就是Facebook打算整合其一系列的应用程序，来提高各个应用的互通性。</p>
+
+<p>关于Instagram上购物，类似于平时我们浏览图片时，可以点击图片然后跳转到购买页面。</p>
+
+<p>也不知道是老外抄袭我们的技术还是我们抄袭老外的，哈哈。</p>
+
+<h2 id="tip">Tip</h2>
+
+<p>MongoDB作为一个内存数据库，对于数据的操作大部分都是在内存中的。日常使用MongoDB的过程中，常常会需要对数据进行分页。</p>
+
+<p>常见的<strong>MongoTemplate分页</strong>查询</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import java.util.List;
+
+/**
+ * Created by bugcoder.
+ */
+public class PageModel&lt;T&gt; {
+    //结果集
+    private List&lt;T&gt; datas;
+
+    //查询记录数
+    private int rowCount;
+
+    //每页多少条数据
+    private int pageSize=20;
+
+    //第几页
+    private int pageNo=1;
+
+    //跳过几条数
+    private int skip=0;
+
+    /**
+     * 总页数
+     * @return
+     */
+    public int getTotalPages(){
+        return(rowCount+pageSize-1)/pageSize;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(int pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public int getSkip() {
+        return skip;
+    }
+
+    public void setSkip(int skip) {
+        this.skip = skip;
+    }
+
+
+    public List&lt;T&gt; getDatas() {
+        return datas;
+    }
+
+    public void setDatas(List&lt;T&gt; datas) {
+        this.datas = datas;
+    }
+}
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.io.Serializable;
+
+/**
+ * Created by bugcoder.
+ */
+public class MongoDataPageable implements Serializable,Pageable{
+
+    private static final long serialVersionUID = 1L;
+
+    // 当前页
+    private Integer pageNo = 1;
+
+    // 当前页面条数
+    private Integer pageSize = 10;
+
+    // 排序条件
+    private Sort sort;
+
+    @Override
+    public int getPageNumber() {
+        return getPageNo();
+    }
+
+    @Override
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    @Override
+    public int getOffset() {
+        return (getPageNumber() - 1) * getPageSize();
+    }
+
+    @Override
+    public Sort getSort() {
+        return sort;
+    }
+
+    @Override
+    public Pageable next() {
+        return null;
+    }
+
+    @Override
+    public Pageable previousOrFirst() {
+        return null;
+    }
+
+    @Override
+    public Pageable first() {
+        return null;
+    }
+
+    @Override
+    public boolean hasPrevious() {
+        return false;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+
+    public void setSort(Sort sort) {
+        this.sort = sort;
+    }
+}
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import com.ai.bugcodes.domain.File;
+import com.ai.bugcodes.message.base.BaseMessage;
+import com.ai.bugcodes.openapi.service.mongo.IImMessageFileMongoSV;
+import com.ai.bugcodes.openapi.service.mongo.utils.MongoDataPageable;
+import com.ai.bugcodes.openapi.service.mongo.utils.PageModel;
+import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by bugcoder.
+ */
+@Service
+public class IImMessageFileMongoSV implements IImMessageFileMongoSV {
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Override
+    public BaseMessage findByMessageId(String messageId) {
+        return mongoTemplate.findOne(new Query(Criteria.where("id").is(messageId)),
+                BaseMessage.class, "imMessage");
+    }
+
+    @Override
+    public BaseMessage findByChannel(String channelId) {
+        return mongoTemplate.findOne(new Query(Criteria.where("channel").is(channelId)),
+                BaseMessage.class);
+    }
+
+    @Override
+    public BaseMessage findByTypeAndChannel(String type, String channelId) {
+        return mongoTemplate.findOne(
+                new Query(Criteria.where("type").is(type).and("channel").is(channelId)),
+                BaseMessage.class, "imMessage");
+    }
+
+    @Override
+    public PageModel&lt;BaseMessage&gt; getImMessages(PageModel&lt;BaseMessage&gt; page, DBObject queryObject) {
+        Query query = new BasicQuery(queryObject);
+        // 查询总数
+        int count = (int) mongoTemplate.count(query, BaseMessage.class);
+        page.setRowCount(count);
+
+        // 排序
+        query.with(new Sort(Sort.Direction.ASC, "id"));
+        query.skip(page.getSkip()).limit(page.getPageSize());
+        List&lt;BaseMessage&gt; datas = mongoTemplate.find(query, BaseMessage.class);
+        page.setDatas(datas);
+        return page;
+    }
+
+    @Override
+    public List&lt;BaseMessage&gt; findMessageByPage(int pageNo, int pageSize) {
+        int startNum = (pageNo - 1) * pageSize;
+        return mongoTemplate.find(new Query().skip(startNum).limit(pageSize), BaseMessage.class);
+    }
+
+    @Override
+    public Page&lt;BaseMessage&gt; channelFilesQuery(Integer pageNum, Integer pageSize,
+            String channelId) {
+        MongoDataPageable pageable = new MongoDataPageable();
+        Query query = new Query(
+                Criteria.where("channel").is(channelId).and("type").in("file", "image"));
+        List&lt;Sort.Order&gt; orders = new ArrayList&lt;Sort.Order&gt;(); // 排序
+        orders.add(new Sort.Order(Sort.Direction.DESC, "ts"));
+        Sort sort = new Sort(orders);
+
+        // 开始页
+        pageable.setPageNo(pageNum);
+        // 每页条数
+        pageable.setPageSize(pageSize);
+        // 排序
+        pageable.setSort(sort);
+        // 查询出一共的条数
+        Long count = mongoTemplate.count(query, BaseMessage.class);
+        // 查询
+        List&lt;BaseMessage&gt; list = mongoTemplate.find(query.with(pageable), BaseMessage.class);
+        // 将集合与分页结果封装
+        Page&lt;BaseMessage&gt; pagelist = new PageImpl&lt;BaseMessage&gt;(list, pageable, count);
+
+        return pagelist;
+    }
+
+    @Override
+    public Page&lt;BaseMessage&gt; myFilesQuery(Integer pageNum, Integer pageSize, String channelId,
+            String accountId) {
+        MongoDataPageable pageable = new MongoDataPageable();
+        Query query = new Query(Criteria.where("channel").is(channelId).and("user").is(accountId)
+                .and("type").in("file", "image"));
+        List&lt;Sort.Order&gt; orders = new ArrayList&lt;Sort.Order&gt;(); // 排序
+        orders.add(new Sort.Order(Sort.Direction.DESC, "ts"));
+        Sort sort = new Sort(orders);
+        // 开始页
+        pageable.setPageNo(pageNum);
+        // 每页条数
+        pageable.setPageSize(pageSize);
+        // 排序
+        pageable.setSort(sort);
+        // 查询出一共的条数
+        Long count = mongoTemplate.count(query, BaseMessage.class);
+        // 查询
+        List&lt;BaseMessage&gt; list = mongoTemplate.find(query.with(pageable), BaseMessage.class);
+        // 将集合与分页结果封装
+        Page&lt;BaseMessage&gt; pagelist = new PageImpl&lt;BaseMessage&gt;(list, pageable, count);
+
+        return pagelist;
+    }
+
+    @Override
+    public void createCollectionsName(String collectionName){
+        if (mongoTemplate.collectionExists(collectionName)){
+            return;
+        }
+        mongoTemplate.createCollection(collectionName);
+    }
+
+    @Override
+    public void insertFileData(File file,String collectionName) {
+        if (mongoTemplate.collectionExists(collectionName)){
+            mongoTemplate.insert(file,collectionName);
+        }
+    }
+
+    public void addFileChannels(String channelId){
+        Query query = new Query(Criteria.where("id").is("E41F1BA999114BCE848CA1F25D53944C"));
+        Update update = new Update();
+        update.addToSet("channels",channelId);
+        WriteResult writeResult = mongoTemplate.upsert(query,update,File.class,"im_image");
+        System.out.println("=========================");
+        System.out.println(writeResult.toString());
+    }
+}
+</code></pre></div></div>
+
+<h2 id="share">Share</h2>
+
+<p>Lucene学习笔记-<strong>布尔检索模型</strong></p>
+
+<p>ElasticSearch基于Lucene实现，学习Lucene的底层实现，有利于我们更好的使用ES。</p>
+
+<hr />
+
+<ol>
+  <li>
+    <p>词项频率：同意单词在某个文档中出现的频率</p>
+  </li>
+  <li>
+    <p>文档频率：出现某个词项的文档的数目</p>
+  </li>
+  <li>
+    <p>倒排记录表：用于记录出现过某个单词的所有文档的文档列表，以及单词在改文档中出现的位置信息</p>
+  </li>
+  <li>
+    <p>倒排文件：倒排记录表在磁盘中的物理存储文件称为倒排文件</p>
+  </li>
+  <li>
+    <p>倒排索引：也被成为反向索引，一种索引方法，被用来存储在全文搜索下某个单词，在一个文档或一组文档中的存储位置的映射关系，它是文档检索系统中最常用的数据结构</p>
+  </li>
+</ol>
+
+<p><strong>布尔检索模型</strong></p>
+
+<p>布尔检索法是指利用布尔运算符连接各个检索词，然后由计算机进行逻辑运算，找出所需信息的一种检索方法。在改模型下，每篇文档被看成是一系列词的集合。</p>
+
+<p>该模型下主要有三种逻辑运算</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AND(*) 、OR(+) 、NOT(-) 对应java中的(&amp;)、(|)、(~)
+</code></pre></div></div>
+
+<p><strong>用法</strong></p>
+
+<p>假如有如下单词-文档矩阵</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th style="text-align: right">doc1</th>
+      <th style="text-align: center">doc2</th>
+      <th>doc3</th>
+      <th>doc4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>谷歌</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: center">1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>开源</td>
+      <td style="text-align: right">0</td>
+      <td style="text-align: center">1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>大会</td>
+      <td style="text-align: right">1</td>
+      <td style="text-align: center">0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>想要查询包含谷歌和开源但不包含大会的文档：谷歌AND开源NOT大会</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0101
+0101
+0111(1000取反)
+————————
+0101
+</code></pre></div></div>
+
+<p><strong>结果：</strong> 向量中第2和第4个元素为1，则文档2和文档4是符合查询条件的文档</p>
+
+<p>参考：«从Lucene到Elasticsearch全文检索实战»</p>
+
+
+	  ]]></description>
+	</item>
+
+
+</channel>
+</rss>
